@@ -10,3 +10,7 @@ def index(request):
 
 def detail(request, analytic_id):
     return HttpResponse("You're on the analytics detail page %s." % analytic_id)
+
+def new_record_ref(request):
+    
+    return render(request, 'cockpit/new_record_ref.html', locals())

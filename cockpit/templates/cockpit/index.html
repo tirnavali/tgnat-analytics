@@ -1,4 +1,7 @@
 <h1>Referans Birimi Analitikleri</h1>
+<div>
+    <a href="{% url 'new_record_ref' %}">Yeni Kayıt Ekle</a>
+</div>
 {% if latest_data_list %}
 <table border="1">
   <thead>
@@ -27,7 +30,6 @@
         <td>{{data.retired_books}}</td>
         <td>{{data.photocopy}}</td>
         <td>{{data.record_date|date:"M Y"}}</td>
-        <td>Ayrıntılar</td>
         <td>Düzenle</td>
         <td>Sil</td>
     </tr>
