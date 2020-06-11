@@ -1,0 +1,40 @@
+<h1>Referans Birimi Analitikleri</h1>
+{% if latest_data_list %}
+<table border="1">
+  <thead>
+      <th>Kayıt</th>
+    <th>Dış kullanıcı</th>
+    <th>İç Kullanıcı</th>
+    <th>Online dış kullanıcı</th>
+    <th>Online iç kullanıcı</th>
+    <th>Ödünç Alınan kitap</th>
+    <th>İade Edilen kitap</th>
+    <th>Fotokopi Adet</th>
+    <th>Tarih</th>
+  </thead>
+  <tbody>
+
+  <ul>
+    {% for data in latest_data_list %}
+    
+    <tr>
+        <td><a href="/cockpit/{{ data.id }}/">{{ data.id }}</a></td>
+        <td>{{data.user_from_out}}</td>
+        <td>{{data.user_from_inside}}</td>
+        <td>{{data.online_user_outside}}</td>
+        <td>{{data.online_user_inside}}</td>
+        <td>{{data.borrowed_books}}</td>
+        <td>{{data.retired_books}}</td>
+        <td>{{data.photocopy}}</td>
+        <td>{{data.record_date|date:"M Y"}}</td>
+        <td>Ayrıntılar</td>
+        <td>Düzenle</td>
+        <td>Sil</td>
+    </tr>
+    {% endfor %}
+  </ul>
+</tbody>
+</table>
+{% else %}
+<p>No data is available.</p>
+{% endif %}
