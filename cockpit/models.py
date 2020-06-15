@@ -12,7 +12,7 @@ class ReferenceServiceAnalytic(models.Model):
     retired_books = models.IntegerField(default=0)
 
     photocopy = models.IntegerField(default=0)
-    record_date = models.DateTimeField('date data entered')
+    record_date = models.DateTimeField()
 
     def __str__(self):
         return str(self.record_date)

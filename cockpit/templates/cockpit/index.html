@@ -1,13 +1,16 @@
+{% include 'cockpit/header.html' %}
 <h1>Referans Birimi Analitikleri</h1>
+{% load static %}
+
 <div>
-    <a href="{% url 'new_record_ref' %}">Yeni Kayıt Ekle</a>
+    <a class="btn btn-primary" href="{% url 'new_record_ref' %}">Yeni Kayıt Ekle</a>
 </div>
 {% if latest_data_list %}
-<table border="1">
+<table class="table table-dark" border="1">
   <thead>
-      <th>Kayıt</th>
-    <th>Dış kullanıcı</th>
-    <th>İç Kullanıcı</th>
+      <th scope="col">Kayıt</th>
+    <th scope="col">Dış kullanıcı</th>
+    <th scope="col">İç Kullanıcı</th>
     <th>Online dış kullanıcı</th>
     <th>Online iç kullanıcı</th>
     <th>Ödünç Alınan kitap</th>
@@ -40,3 +43,4 @@
 {% else %}
 <p>No data is available.</p>
 {% endif %}
+{% include 'cockpit/footer.html' %}

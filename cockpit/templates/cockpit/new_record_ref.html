@@ -1,1 +1,12 @@
+{% include 'cockpit/header.html' %}
+{% load static %}
 <h1>Yeni kayıt ekle</h1>
+<form method="POST">
+    {% csrf_token %}
+    <table border="">
+    {{ form }}
+    </table>
+    <input class="btn btn-primary" type="submit" >
+</form>
+
+{% include 'cockpit/footer.html' %}
