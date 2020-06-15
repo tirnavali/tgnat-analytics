@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 from .models import ReferenceServiceAnalytic
@@ -18,7 +18,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 def index(request):
-    latest_data_list = ReferenceServiceAnalytic.objects.order_by('-record_date')[:5]
+    latest_data_list = ReferenceServiceAnalytic.objects.order_by('-record_date')
     context = {'latest_data_list': latest_data_list}
     return render(request, 'cockpit/index.html', context)
 
@@ -46,12 +46,9 @@ class RefAnalyticsFormView(View):
 
     def post(self, request):
         form = ReferenceAnalyticForm(request.POST)
+        form_errors = []
         if form.is_valid():
-            print("Her çey yolunda")
-            # <process form cleaned data>
-            print(request.POST)
-
-
+    
             model_data = ReferenceServiceAnalytic()
             model_data.user_from_out = request.POST.get('user_from_out')
             model_data.user_from_inside = request.POST.get('user_from_inside')
@@ -60,10 +57,12 @@ class RefAnalyticsFormView(View):
             model_data.borrowed_books = request.POST.get('borrowed_books')
             model_data.retired_books = request.POST.get('retired_books')
             model_data.photocopy = request.POST.get('photocopy')
-           
-
             model_data.record_date = request.POST.get('record_date')
-            print("MODEL DATa ---> {}".format(model_data))
-            model_data.save()
-            return HttpResponseRedirect('')
+
+            if model_data.is_minus_value_entered():
+                form_errors.append("Forma eksi (-) değer girilemez.")
+                return render(request, self.template_name, {'form': form, 'errors' : form_errors})
+            else:
+                model_data.save()
+                return redirect('index')
         return render(request, self.template_name, {'form': form})
