@@ -35,6 +35,12 @@ class GreetingView(View):
     def get(self, request):
         return HttpResponse(self.greeting)
 
+class MarketingPage(View):
+    baslik = "Hoşgeldiniz"
+
+    def get(self, request):
+        return render(request, 'cockpit/marketing.html', locals())
+
 
 class RefAnalyticsFormView(View):
     form = ReferenceAnalyticForm()
