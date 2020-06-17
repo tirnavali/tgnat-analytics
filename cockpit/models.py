@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class ReferenceServiceAnalytic(models.Model):
-    user_from_out = models.IntegerField(default=0)
+    user_from_out = models.IntegerField(default=0, verbose_name="Dışarıdan gelen kullanıcı sayısı")
     user_from_inside = models.IntegerField(default=0)
 
     online_user_outside = models.IntegerField(default=0)

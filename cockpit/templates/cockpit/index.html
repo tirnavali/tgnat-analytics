@@ -7,7 +7,7 @@
 </div>
 {% if latest_data_list %}
 <table class="table table-dark" border="1">
-  <thead>
+  <thead class="">
       <th scope="col">Kayıt</th>
     <th scope="col">Dış kullanıcı</th>
     <th scope="col">İç Kullanıcı</th>
@@ -24,7 +24,7 @@
     {% for data in latest_data_list %}
     
     <tr>
-        <td><a href="/cockpit/{{ data.id }}/">{{ data.id }}</a></td>
+        <td><a href="/referans/{{ data.id }}">Detay</a></td>
         <td>{{data.user_from_out}}</td>
         <td>{{data.user_from_inside}}</td>
         <td>{{data.online_user_outside}}</td>
@@ -33,7 +33,7 @@
         <td>{{data.retired_books}}</td>
         <td>{{data.photocopy}}</td>
         <td>{{data.record_date|date:"M Y"}}</td>
-        <td>Düzenle</td>
+        <td><a href="{% url 'edit-reference' data.pk %}">Düzenle</a></td>
         <td>Sil</td>
     </tr>
     {% endfor %}

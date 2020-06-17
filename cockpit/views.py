@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
+from django.views.generic import DetailView
 from .models import ReferenceServiceAnalytic
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
@@ -46,7 +47,10 @@ class RefAnalyticsFormView(View):
     form = ReferenceAnalyticForm()
     template_name = 'cockpit/new_record_ref.html'
 
-    def get(self, request):
+    def get(self, request, pk):
+        if pk:
+            print("NESNEYİ BUL VE FORMA BAS")
+            print("PK var {}".format(str(pk)))
         form = self.form
         return render(request, self.template_name, {'form': form})
 
@@ -72,3 +76,6 @@ class RefAnalyticsFormView(View):
                 model_data.save()
                 return redirect('index')
         return render(request, self.template_name, {'form': form})
+
+class RefAnalyticsDetailView(DetailView):
+    model = ReferenceServiceAnalytic
