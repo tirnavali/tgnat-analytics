@@ -1,9 +1,10 @@
 {% include 'cockpit/header.html' %}
-<h1>Referans Birimi Analitikleri</h1>
+
 {% load static %}
 
 <div>
-    <a class="btn btn-primary" href="{% url 'new_record_ref' %}">Yeni Kayıt Ekle</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'new_record_ref' %}">Yeni Kayıt Ekle</a> 
+    <i data-feather="arrow-right"></i>
 </div>
 {% if latest_data_list %}
 <table class="table table-dark" border="1">
