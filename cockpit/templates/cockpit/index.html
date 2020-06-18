@@ -1,10 +1,12 @@
 {% include 'cockpit/header.html' %} {% load static %}
 
 <div>
+  {%  if user.is_authenticated %}
   <a class="btn btn-primary btn-sm" href="{% url 'new_record_ref' %}"
     >Yeni Kayıt Ekle</a
   >
   <i data-feather="arrow-right"></i>
+  {% endif %}
 </div>
 {% if latest_data_list %}
 <table class="table table-dark" border="1">

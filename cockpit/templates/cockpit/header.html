@@ -6,9 +6,11 @@
       rel="stylesheet"
       href="{% static 'cockpit/css/bootstrap.min.css' %}"
     />
-    
-{% comment %}     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script> {% endcomment %}
+
+    {% comment %}
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    {% endcomment %}
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -56,7 +58,19 @@
           </li>
         </ul>
       </div>
+      <div>
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav">
+          <li class="nav-item text-white mr-2">Hoşgeldin {{ user.username}}</li>
+          <li class="nav-item text-white "><a class="text-danger" href="{% url 'logout' %}">Çıkış</a></li>
+          {% else %}
+          <ul class="navbar-nav">
+            <li class="nav-item text-white mr-2"><a class="text-info" href="{% url 'login' %}">Giriş</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </nav>
     <h2 class="bg-secondary">{{modul_baslik}}</h2>
-    <div class="container-fluid">
-  
+    <div class="container-fluid"></div>
+  </body>
+</html>
