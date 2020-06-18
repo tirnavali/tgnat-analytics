@@ -1,15 +1,16 @@
-{% include 'cockpit/header.html' %}
-
-{% load static %}
+{% include 'cockpit/header.html' %} {% load static %}
 
 <div>
-    <a class="btn btn-primary btn-sm" href="{% url 'new_record_ref' %}">Yeni Kayıt Ekle</a> 
-    <i data-feather="arrow-right"></i>
+  <a class="btn btn-primary btn-sm" href="{% url 'new_record_ref' %}"
+    >Yeni Kayıt Ekle</a
+  >
+  <i data-feather="arrow-right"></i>
 </div>
 {% if latest_data_list %}
 <table class="table table-dark" border="1">
   <thead class="">
-      <th scope="col">Kayıt</th>
+    <div class="ml-2">
+    <th scope="col">Kayıt</th>
     <th scope="col">Dış kullanıcı</th>
     <th scope="col">İç Kullanıcı</th>
     <th>Online dış kullanıcı</th>
@@ -18,13 +19,13 @@
     <th>İade Edilen kitap</th>
     <th>Fotokopi Adet</th>
     <th>Tarih</th>
+  </div>
   </thead>
   <tbody>
+    <ul>
+      {% for data in latest_data_list %}
 
-  <ul>
-    {% for data in latest_data_list %}
-    
-    <tr>
+      <tr>
         <td><a href="/referans/{{ data.id }}">Detay</a></td>
         <td>{{data.user_from_out}}</td>
         <td>{{data.user_from_inside}}</td>
@@ -34,14 +35,13 @@
         <td>{{data.retired_books}}</td>
         <td>{{data.photocopy}}</td>
         <td>{{data.record_date|date:"M Y"}}</td>
-        <td><a href="{% url 'edit-reference' data.pk %}">Düzenle</a></td>
-        <td>Sil</td>
-    </tr>
-    {% endfor %}
-  </ul>
-</tbody>
+        <td><a href="{% url 'edit_reference' data.pk %}">Düzenle</a></td>
+        <td><a class="text-danger" href="{% url 'edit_reference' data.pk%}?sil=True">Sil</a></td>
+      </tr>
+      {% endfor %}
+    </ul>
+  </tbody>
 </table>
 {% else %}
 <p>No data is available.</p>
-{% endif %}
-{% include 'cockpit/footer.html' %}
+{% endif %} {% include 'cockpit/footer.html' %}

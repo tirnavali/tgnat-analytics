@@ -3,9 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.MarketingPage.as_view(), name='marketing_page'),
-    path('referans/', views.index, name='referance'),        
+    path('referans/', views.index, name='reference_index'),        
     path('referans/yeni/', views.RefAnalyticsFormView.as_view(), name='new_record_ref'),
     path('referans/<int:pk>/', views.RefAnalyticsDetailView.as_view(), name="detail"),
-    path('referans/<int:pk>/duzenle/', views.RefAnalyticsFormView.as_view(), name='edit-reference')
+    path('referans/<int:pk>/duzenle/', views.RefAnalyticsFormView.as_view(), name='edit_reference')
 ]
 

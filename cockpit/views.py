@@ -58,11 +58,24 @@ class RefAnalyticsFormView(View):
 
     def get(self, request, *args, **kwargs):
         """
+        url : 'referans/yeni/'
+        url : 'referans/<int:pk>/duzenle/
         Bu fonksiyona hem düzenleme hemde yeni veri sayfası görüntüleme isteği gelebilir.
         Eğer düzenleme sayfası isteği varsa pk dolu olmalıdır.
         Aksi halde yeni gönderi sayfası talep edildiği anlaşılacaktır.
         """
         pk = self.kwargs.get('pk')
+        # silme işlemi
+        if(request.GET.get('sil')):
+            try:
+                self.obj  =  ReferenceServiceAnalytic.objects.get(pk=pk)
+                self.obj.delete()
+                return redirect('reference_index')
+            except:
+                return HttpResponse("Böyle bir sayfa yok")
+            return HttpResponse("silinecek veri id'si {}".format(str(pk)))
+
+        # düzenleme işlemi
         if pk:
             try:
                 self.obj = ReferenceServiceAnalytic.objects.get(pk=pk)
