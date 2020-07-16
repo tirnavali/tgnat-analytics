@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.serializers import serialize
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
 from django.views.generic import DetailView
 from .models import ReferenceServiceAnalytic
@@ -7,6 +8,7 @@ from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
 from django.contrib.auth.models import User, Group
 from cockpit.forms import *
+
 
 # Create your views here.
 
@@ -18,13 +20,25 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+def reference_api(request):
+    """ Reference model verisini json olarak gönderir."""
+    data2 = ReferenceServiceAnalytic.objects.all().values()
+    return JsonResponse(list(data2), safe=False)
+
+
+def reference_chart(request):
+    """ Burada d3.js ile oluşturulan görseller yer alıyor. """
+    return render(request, 'cockpit/reference_chart.html', locals())
+
 def index(request):
     """ 
-    ReferenceServiceAnalytic modelinin index sayfası
+    ReferenceServiceAnalytic modelinin index sayfası.
     """
     latest_data_list = ReferenceServiceAnalytic.objects.order_by('-record_date')
-    context = {'latest_data_list': latest_data_list,
-    'modul_baslik'  :"Referans Hizmetleri Analitikleri"}
+    data = serialize('json', ReferenceServiceAnalytic.objects.all())
+    context = { 'latest_data_list'  : latest_data_list,
+                'modul_baslik'      :"Referans Hizmetleri Analitikleri",
+                'data'              : data}
     return render(request, 'cockpit/index.html', context)
 
 """ def detail(request, analytic_id):

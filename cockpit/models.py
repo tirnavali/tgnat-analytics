@@ -13,6 +13,7 @@ class ReferenceServiceAnalytic(models.Model):
 
     photocopy = models.IntegerField(default=0)
     record_date = models.DateTimeField()
+    date = models.DateField()
 
     def __str__(self):
         return str(self.record_date)
