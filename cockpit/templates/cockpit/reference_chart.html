@@ -1,13 +1,24 @@
-{% include 'cockpit/header.html' %}
+{% extends 'cockpit/base.html' %}
 {% load static %}
-<h1>Referans tabloları</h1>
+{% block header %}
 <script type="text/javascript" src="{% static 'cockpit/js/reference_chart.js' %}"></script>
+<link
+      rel="stylesheet"
+      href="{% static 'cockpit/css/reference_chart.css' %}"
+    />
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+
+<h1>Referans birimi verileri</h1>
+
 
 <svg >
    
 </svg>
-
-
-
-
-{% include 'cockpit/footer.html' %}
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 `Bu dosya reference_chart.html sayfasındaki d3.js görsellerini oluşturmaktadır.`;
-const width = 600;
-const height = 600;
+const width = 700;
+const height = 700;
 const padding = 50;
 d3.json("http://localhost:8000/api/referans/").then(function (datas) {
   const yScale = d3
@@ -16,12 +16,14 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .scaleLinear()
     .domain(d3.extent(datas, (d) => d.borrowed_books))
     .range([2, 15]);
-  const xAxis = d3.axisBottom(xScale)
+  const xAxis = d3
+    .axisBottom(xScale)
     .tickSize(-height + 2 * padding)
     .tickSizeOuter(0);
-  const yAxis = d3.axisLeft(yScale)
-  .tickSize(-width + 2 * padding)
-  .tickSizeOuter(0);
+  const yAxis = d3
+    .axisLeft(yScale)
+    .tickSize(-width + 2 * padding)
+    .tickSizeOuter(0);
 
   d3.select("svg")
     .append("g")
@@ -43,6 +45,14 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .attr("cx", (d) => xScale(d.user_from_inside))
     .attr("cy", (d) => yScale(d.borrowed_books))
     .attr("r", (d) => radiusScale(d.borrowed_books));
+
+  d3.select("svg")
+    .append("text")
+    .attr("x", width / 2)
+    .attr("y", height - padding)
+    .attr("dy", "1.5em")
+    .style("text-anchor", "middle")
+    .text("Gelen iç kullanıcı sayısı ile ödünç verilen kitap sayısı ilişkisi");
 });
 
 let datas = "";
