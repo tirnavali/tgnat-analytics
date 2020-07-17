@@ -1,0 +1,4 @@
+.tick line {
+    stroke: #ccc;
+    stroke-dasharray: 10, 5;
+}

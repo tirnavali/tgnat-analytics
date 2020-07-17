@@ -1,3 +1,16 @@
-{% include 'cockpit/header.html' %}
+{% extends 'cockpit/base.html' %}
+{% load static %}
+{% block header %}
+<link
+      rel="stylesheet"
+      href="{% static 'cockpit/css/marketing_page.css' %}"
+    />
+
+{% endblock %}
+
+
+{% block content %}
 <h1>This is marketing page</h1>
-{% include 'cockpit/footer.html' %}
+{% endblock %}
+
+
