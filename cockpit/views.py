@@ -27,8 +27,12 @@ def reference_api(request):
 
 
 def reference_chart(request):
-    """ Burada d3.js ile oluşturulan görseller yer alıyor. """
+    """ Burada d3.js ile oluşturulan scatter plot yer alıyor. """
     return render(request, 'cockpit/reference_chart.html', locals())
+
+def reference_line_chart(request):
+    """ Burada d3.js ile oluşturulan line chart yer alıyor. """
+    return render(request, 'cockpit/reference_line_chart.html', locals())
 
 def index(request):
     """ 
