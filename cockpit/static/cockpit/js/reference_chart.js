@@ -1,6 +1,6 @@
 `Bu dosya reference_chart.html sayfasındaki d3.js görsellerini oluşturmaktadır.`;
-const width = 700;
-const height = 700;
+const width = 1200;
+const height = 750;
 const padding = 50;
 d3.json("http://localhost:8000/api/referans/").then(function (datas) {
   const yScale = d3
@@ -49,11 +49,20 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
 
   d3.select("svg")
     .append("text")
+    .attr("transform", " rotate(-90) translate(-"+ (height-(padding/2))  +",-"+(padding*1.5)+")")
+    .attr("x", padding/ 2)
+    .attr("y", padding )
+    .attr("dy", "2.5em")
+    .style("text-anchor", "left")
+    .text("Ödünç verilen kitap sayısı")
+
+  d3.select("svg")
+    .append("text")
     .attr("x", width / 2)
     .attr("y", height - padding)
     .attr("dy", "1.5em")
     .style("text-anchor", "middle")
-    .text("Gelen iç kullanıcı sayısı ile ödünç verilen kitap sayısı ilişkisi");
+    .text("Tüm zamanlarda gelen iç kullanıcı sayısı ile ödünç verilen kitap sayısı ilişkisi");
 });
 
 let datas = "";

@@ -7,8 +7,8 @@ urlpatterns = [
     path('referans/yeni/', views.RefAnalyticsFormView.as_view(), name='new_record_ref'),
     path('referans/<int:pk>/', views.RefAnalyticsDetailView.as_view(), name="detail"),
     path('referans/<int:pk>/duzenle/', views.RefAnalyticsFormView.as_view(), name='edit_reference'),
-    path('referans/chart', views.reference_chart, name="reference-chart"),
-    path('referans/line_chart', views.reference_line_chart, name='reference-line-chart'),
+    path('referans/chart', views.reference_chart, name="reference_chart"),
+    path('referans/line_chart', views.reference_line_chart, name='reference_line_chart'),
     path('api/referans/', views.reference_api, name="reference-api")
 ]
 

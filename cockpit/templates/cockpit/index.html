@@ -1,5 +1,8 @@
-{% include 'cockpit/header.html' %} {% load static %}
+{% extends 'cockpit/base.html' %}
+{% load static %}
 
+
+{% block content  %}
 <div>
   {%  if user.is_authenticated %}
   <a class="btn btn-primary btn-sm" href="{% url 'new_record_ref' %}"
@@ -9,18 +12,21 @@
   {% endif %}
 </div>
 {% if latest_data_list %}
-<table class="table table-dark" border="1">
+<div class="table-responsive" >
+<table class="table" >
   <thead class="">
     <div class="ml-2">
     <th scope="col">Kayıt</th>
-    <th scope="col">Dış kullanıcı</th>
-    <th scope="col">İç Kullanıcı</th>
-    <th>Online dış kullanıcı</th>
-    <th>Online iç kullanıcı</th>
-    <th>Ödünç Alınan kitap</th>
-    <th>İade Edilen kitap</th>
-    <th>Fotokopi Adet</th>
-    <th>Tarih</th>
+    <th class="text-right" scope="col">Dış kullanıcı</th>
+    <th class="text-right" scope="col">İç Kullanıcı</th>
+    <th class="text-right">Online dış kullanıcı</th>
+    <th class="text-right">Online iç kullanıcı</th>
+    <th class="text-right">Ödünç Alınan kitap</th>
+    <th class="text-right">İade Edilen kitap</th>
+    <th class="text-right">Fotokopi Adet</th>
+    <th class="text-right">Tarih</th>
+    <th></th>
+    <th></th>
   </div>
   </thead>
   <tbody>
@@ -29,24 +35,28 @@
 
       <tr>
         <td><a href="/referans/{{ data.id }}">Detay</a></td>
-        <td>{{data.user_from_out}}</td>
-        <td>{{data.user_from_inside}}</td>
-        <td>{{data.online_user_outside}}</td>
-        <td>{{data.online_user_inside}}</td>
-        <td>{{data.borrowed_books}}</td>
-        <td>{{data.retired_books}}</td>
-        <td>{{data.photocopy}}</td>
-        <td>{{data.record_date|date:"M Y"}}</td>
+        <td class="text-right">{{data.user_from_out}}</td>
+        <td class="text-right">{{data.user_from_inside}}</td>
+        <td class="text-right">{{data.online_user_outside}}</td>
+        <td class="text-right">{{data.online_user_inside}}</td>
+        <td class="text-right">{{data.borrowed_books}}</td>
+        <td class="text-right">{{data.retired_books}}</td>
+        <td class="text-right">{{data.photocopy}}</td>
+        <td class="text-right">{{data.record_date|date:"M Y"}}</td>
+        {%  if user.is_authenticated %}
         <td><a href="{% url 'edit_reference' data.pk %}">Düzenle</a></td>
         <td><a class="text-danger" href="{% url 'edit_reference' data.pk%}?sil=True">Sil</a></td>
+        {% endif %}
       </tr>
       {% endfor %}
     </ul>
   </tbody>
 </table>
-<div class="chart">
-  <p></p>
 </div>
 {% else %}
 <p>No data is available.</p>
-{% endif %} {% include 'cockpit/footer.html' %}
+{% endif %}
+
+{% endblock %}
+
+

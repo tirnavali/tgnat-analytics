@@ -1,75 +1,67 @@
 {% load static %}
 <html>
-    <head>
-        {% include 'cockpit/base_header.html' %}
-        {% block header %}
-        {% endblock%}
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{% url 'marketing_page' %}">TBMM</a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'reference_index' %}"
-                    >Referans <span class="sr-only">(current)</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Katalog</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Süreli Yayınlar</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Tutanak
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div>
-              {% if user.is_authenticated %}
-              <ul class="navbar-nav">
-                <li class="nav-item text-white mr-2">Hoşgeldin {{ user.username}}</li>
-                <li class="nav-item text-white "><a class="text-danger" href="{% url 'logout' %}">Çıkış</a></li>
-                {% else %}
-                <ul class="navbar-nav">
-                  <li class="nav-item text-white mr-2"><a class="text-info" href="{% url 'login' %}">Giriş</a></li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
-          <h2 class="bg-secondary">{{modul_baslik}}</h2>
-          <div class="container-fluid"></div>
-        {% block content %}
-        {% endblock %}
 
-        {% block footer%}
-        {% endblock %}
-        {% include 'cockpit/base_footer.html' %}
-    </body>
+<head>
+  {% include 'cockpit/base_header.html' %}
+  {% block header %}
+  {% endblock%}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'marketing_page' %}">TBMM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'reference_index' %}">Referans <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Katalog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Süreli Yayınlar</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Tutanak
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav">
+        <li class="nav-item text-white mr-2">Hoşgeldin {{ user.username}}</li>
+        <li class="nav-item text-white "><a class="text-danger" href="{% url 'logout' %}">Çıkış</a></li>
+        {% else %}
+        <ul class="navbar-nav">
+          <li class="nav-item text-white mr-2"><a class="text-info" href="{% url 'login' %}">Giriş</a></li>
+          {% endif %}
+        </ul>
+    </div>
+  </nav>
+  <h2 class="bg-secondary">{{modul_baslik}} 
+    <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{% url 'reference_chart' %}">Saçılım Grafiği</a>
+    <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{%  url 'reference_line_chart' %}">Çizgi Grafiği</a>
+  </h2>
+  <div class="container-fluid ">
+  {% block content %}
+
+  {% endblock %}
+  </div>
+  {% block footer%}
+  {% endblock %}
+  {% include 'cockpit/base_footer.html' %}
+</body>
+
 </html>

@@ -8,6 +8,11 @@ class ReferenceServiceAnalytic(models.Model):
     online_user_outside = models.IntegerField(default=0)
     online_user_inside = models.IntegerField(default=0)
 
+    microfilm_mp             = models.IntegerField(default=0, verbose_name="Mikrofilm kullanan vekil sayısı")
+    microfilm_retired_mp     = models.IntegerField(default=0, verbose_name="Mikrofilm kullanmış emekli vekil sayısı")
+    microfilm_patron_inside  = models.IntegerField(default=0, verbose_name="Mikrofilm kullanan kurum içi personel sayısı")
+    microfilm_patron_outside = models.IntegerField(default=0, verbose_name="Mikrofim kullanan kurum dışı personel sayısı")
+
     borrowed_books = models.IntegerField(default=0)
     retired_books = models.IntegerField(default=0)
 

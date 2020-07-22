@@ -1,7 +1,7 @@
 `Bu dosya reference_chart.html sayfasındaki d3.js görsellerini oluşturmaktadır.`;
 const margin = { top: 10, right: 30, bottom: 30, left: 60 };
-const width = 700;
-const height = 700;
+const width = 1200;
+const height = 750;
 const padding = 50;
 let verim = "";
 let rafined_data = "";
@@ -69,27 +69,36 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .datum(rafined_data)
     .attr("fill", "none")
     .attr("stroke", "steelblue")
-    .attr("stroke-width", 1.5)
+    .attr("stroke-width", 2.5)
     .attr("d", line(rafined_data))
 
-  // d3.select("svg")
-  //   .attr("width", width)
-  //   .attr("height", height)
-  //   .selectAll("circle")
-  //   .data(datas)
-  //   .enter()
-  //   .append("circle")
-  //   .attr("cx", (d) => xScale(d.online_user_outside))
-  //   .attr("cy", (d) => yScale(d.borrowed_books))
-  //   .attr("r", (d) => radiusScale(d.borrowed_books));
+  d3.select("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .selectAll("circle")
+    .data(rafined_data)
+    .enter()
+    .append("circle")
+    .attr("cx", (d) => xScale(d.date))
+    .attr("cy", (d) => yScale(d.value))
+    .attr("r", 2.5);
 
   d3.select("svg")
     .append("text")
     .attr("x", width / 2)
     .attr("y", height - padding)
-    .attr("dy", "1.5em")
+    .attr("dy", "2.5em")
     .style("text-anchor", "middle")
     .text("Tarihe göre çekilen fotokopi sayısındaki değişim");
+
+  d3.select("svg")
+  .append("text")
+  .attr("transform", " rotate(-90) translate(-"+ (height-(padding/2))  +",-"+(padding*1.5)+")")
+  .attr("x", padding/ 2)
+  .attr("y", padding )
+  .attr("dy", "2.5em")
+  .style("text-anchor", "left")
+  .text("Fotokopi sayısı")
 });
 
 let datas = "";
