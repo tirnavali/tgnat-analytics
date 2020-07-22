@@ -69,7 +69,9 @@ class RefAnalyticsFormView(View):
     ReferenceServiceAnalytic modeli için;
     GET, POST, PUT, DELETE görevlerini yerine getirir.
     """
-    form = ReferenceAnalyticForm()
+    #form = ReferenceAnalyticForm()
+    form = ReferenceForm()
+    
     template_name = 'cockpit/new_record_ref.html'
     
     obj = ReferenceServiceAnalytic()
@@ -93,7 +95,7 @@ class RefAnalyticsFormView(View):
                 return HttpResponse("Böyle bir sayfa yok")
             return HttpResponse("silinecek veri id'si {}".format(str(pk)))
 
-        # düzenleme işlemi
+        # düzenleme get işlemi
         if pk:
             try:
                 self.obj = ReferenceServiceAnalytic.objects.get(pk=pk)

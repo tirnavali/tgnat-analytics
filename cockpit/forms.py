@@ -1,4 +1,5 @@
 from django import forms
+from .models import *
 
 class ReferenceAnalyticForm(forms.Form):
     user_from_out = forms.IntegerField(label="Dışarıdan gelen kullanıcı sayısı")
@@ -13,3 +14,8 @@ class ReferenceAnalyticForm(forms.Form):
     photocopy = forms.IntegerField(label="Çekilen fotokopi sayısı")
     record_date = forms.DateTimeField(label="Verilerin toplandığı tarih(ay)", 
         widget=forms.TextInput(attrs={'placeholder':'2019-01-30'}))
+
+class ReferenceForm(forms.ModelForm):
+    class Meta:
+        model = ReferenceServiceAnalytic
+        fields = '__all__'
