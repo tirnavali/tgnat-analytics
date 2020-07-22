@@ -9,6 +9,8 @@ let rafined_data = "";
 const data_preprocess = function (data) {
   //Bu veriyi sıralı almak gerkecek sorun burada
   rafined_data = data.map((d) =>( {date: d3.timeParse('%Y-%m-%d')(d.date), value : d.photocopy }))};
+
+
   // return { date: d3.timeParse("%Y-%m-%d")(d.date), value: d.photocopy };
 
 
@@ -16,6 +18,11 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
   console.log(datas);
   verim = datas;
   data_preprocess(datas)
+
+  rafined_data.sort(function(a,b){
+    if (a.date > b.date){ return 1}
+    if (b.date > a.date) { return -1}
+});
 
   const yScale = d3
     .scaleLinear()
@@ -82,7 +89,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .attr("y", height - padding)
     .attr("dy", "1.5em")
     .style("text-anchor", "middle")
-    .text("Gelen iç kullanıcı sayısı ile ödünç verilen kitap sayısı ilişkisi");
+    .text("Tarihe göre çekilen fotokopi sayısındaki değişim");
 });
 
 let datas = "";

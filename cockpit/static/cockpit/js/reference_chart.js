@@ -16,6 +16,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .scaleLinear()
     .domain(d3.extent(datas, (d) => d.borrowed_books))
     .range([2, 15]);
+  
   const xAxis = d3
     .axisBottom(xScale)
     .tickSize(-height + 2 * padding)
