@@ -125,7 +125,8 @@ class RefAnalyticsFormView(View):
         Aksi halde yeni gönderi olduğu anlaşılacaktır.
         """
         pk = self.kwargs.get('pk')
-        form = ReferenceAnalyticForm(request.POST)
+        #form = ReferenceAnalyticForm(request.POST)
+        form = ReferenceForm(request.POST)
         form_errors = []
         model_data = ReferenceServiceAnalytic()
 
@@ -139,14 +140,44 @@ class RefAnalyticsFormView(View):
         # normal isteklerde burada devam et
         # form geçerliyse bu işlemleri yap
         if form.is_valid():
-            model_data.user_from_out = request.POST.get('user_from_out')
-            model_data.user_from_inside = request.POST.get('user_from_inside')
-            model_data.online_user_outside = request.POST.get('online_user_outside')
-            model_data.online_user_inside = request.POST.get('online_user_inside')
-            model_data.borrowed_books = request.POST.get('borrowed_books')
-            model_data.retired_books = request.POST.get('retired_books')
-            model_data.photocopy = request.POST.get('photocopy')
-            model_data.record_date = request.POST.get('record_date')
+            model_data.user_from_out = form.cleaned_data['user_from_out']
+            model_data.user_from_inside = form.cleaned_data['user_from_inside']
+            model_data.online_user_outside = form.cleaned_data['online_user_outside']
+            model_data.online_user_inside = form.cleaned_data['online_user_inside']
+            model_data.open_access_session_count = form.cleaned_data['open_access_session_count']
+            model_data.depo_used_book = form.cleaned_data['depo_used_book']
+            model_data.depo_used_journal = form.cleaned_data['depo_used_journal']
+            model_data.depo_used_newspaper = form.cleaned_data['depo_used_newspaper']
+            model_data.book_on_loan = form.cleaned_data['book_on_loan']
+            model_data.book_renew = form.cleaned_data['book_renew']
+            model_data.book_withdraw = form.cleaned_data['book_withdraw']
+
+            model_data.book_on_loan_mp = form.cleaned_data['book_on_loan_mp']
+            model_data.book_on_loan_retired_mp = form.cleaned_data['book_on_loan_retired_mp']
+            model_data.book_on_loan_patron_inside = form.cleaned_data['book_on_loan_patron_inside']
+            model_data.mp_count_for_book_use = form.cleaned_data['mp_count_for_book_use']
+            model_data.retired_mp_count_book_use = form.cleaned_data['retired_mp_count_book_use']
+            model_data.inside_patron_count_book_use = form.cleaned_data['inside_patron_count_book_use']
+            
+            model_data.microfilm_use_mp = form.cleaned_data['microfilm_use_mp']
+            model_data.microfilm_use_retired_mp = form.cleaned_data['microfilm_use_retired_mp']
+            model_data.microfilm_use_patron_inside = form.cleaned_data['microfilm_use_patron_inside']
+            model_data.microfilm_use_patron_outside = form.cleaned_data['microfilm_use_patron_outside']
+            model_data.microfilm_income = form.cleaned_data['microfilm_income']
+
+            model_data.photocopy_a4_formal = form.cleaned_data['photocopy_a4_formal']
+            model_data.photocopy_a3_formal = form.cleaned_data['photocopy_a3_formal']
+            model_data.photocopy_a4_paid = form.cleaned_data['photocopy_a4_paid']
+            model_data.photocopy_a3_paid = form.cleaned_data['photocopy_a3_paid']
+            model_data.photocopy_income = form.cleaned_data['photocopy_income']
+            model_data.notes = form.cleaned_data['notes']
+            model_data.date = form.cleaned_data['date']
+            
+
+            #model_data.borrowed_books = request.POST.get('borrowed_books')
+            #model_data.retired_books = request.POST.get('retired_books')
+            #model_data.photocopy = request.POST.get('photocopy')
+            #model_data.record_date = request.POST.get('record_date')
         
         # forma eksi değer girilemez kontrol
             if model_data.is_minus_value_entered():

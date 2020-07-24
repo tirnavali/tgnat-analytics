@@ -1,15 +1,20 @@
 {% include 'cockpit/header.html' %}
 {% load static %}
-<h1>Yeni kayıt ekle</h1>
+
+<div class="container bg-light">
+    <h1>Yeni referans birimi verisi ekleme formu</h1>
 {% if errors %}
 <p>{{ errors }}</p>
 {% endif %}
 <form method="POST">
     {% csrf_token %}
-    <table border="">
+       
+    <table class="table table-striped" >
     {{ form }}
     </table>
     <input class="btn btn-primary" type="submit" >
+    
 </form>
 
+</div>
 {% include 'cockpit/footer.html' %}

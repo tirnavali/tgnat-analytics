@@ -3,17 +3,13 @@ from django.db import models
 # Create your models here.
 class ReferenceServiceAnalytic(models.Model):
     user_from_out = models.IntegerField(default=0, verbose_name="Dışarıdan gelen kullanıcı sayısı.")
-    user_from_inside = models.IntegerField(default=0)
+    user_from_inside = models.IntegerField(default=0, verbose_name="İçeriden gelen kullanıcı sayısı.")
 
-    online_user_outside = models.IntegerField(default=0)
-    online_user_inside = models.IntegerField(default=0)
+    online_user_outside = models.IntegerField(default=0, verbose_name="Dışarıdan gelen online kullanıcı sayısı.")
+    online_user_inside = models.IntegerField(default=0, verbose_name="İçeriden gelen online kullanıcı sayısı.")
     open_access_session_count = models.IntegerField(default=0, verbose_name="Açık erişim sistemi oturum açmış kullanıcı sayısı.")
 
-    microfilm_use_mp               = models.IntegerField(default=0, verbose_name="Mikrofilm kullanmış vekil sayısı.")
-    microfilm_use_retired_mp       = models.IntegerField(default=0, verbose_name="Mikrofilm kullanmış emekli vekil sayısı.")
-    microfilm_use_patron_inside    = models.IntegerField(default=0, verbose_name="Mikrofilm kullanmış kurum içi personel sayısı.")
-    microfilm_use_patron_outside   = models.IntegerField(default=0, verbose_name="Mikrofim kullanmış kurum dışı personel sayısı.")
-    microfilm_income           = models.FloatField(default = 0, verbose_name="Mikrofilmden tahsil edilen TL.")
+  
 
     depo_used_book             = models.IntegerField(default=0, verbose_name="Depodan çıkartılan kitap sayısı.")
     depo_used_journal          = models.IntegerField(default=0, verbose_name="Depodan çıkartılan dergi sayısı.")
@@ -30,6 +26,12 @@ class ReferenceServiceAnalytic(models.Model):
     mp_count_for_book_use        = models.IntegerField(default=0, verbose_name="Kitap ödünç verilen vekil sayısı.")
     retired_mp_count_book_use    = models.IntegerField(default=0, verbose_name="Kitap ödünç verilen emekli vekil sayısı.")
     inside_patron_count_book_use = models.IntegerField(default=0, verbose_name="Kitap ödünç verilen kurum içi kullanıcı  sayısı.")
+
+    microfilm_use_mp               = models.IntegerField(default=0, verbose_name="Mikrofilm kullanmış vekil sayısı.")
+    microfilm_use_retired_mp       = models.IntegerField(default=0, verbose_name="Mikrofilm kullanmış emekli vekil sayısı.")
+    microfilm_use_patron_inside    = models.IntegerField(default=0, verbose_name="Mikrofilm kullanmış kurum içi personel sayısı.")
+    microfilm_use_patron_outside   = models.IntegerField(default=0, verbose_name="Mikrofim kullanmış kurum dışı personel sayısı.")
+    microfilm_income           = models.FloatField(default = 0, verbose_name="Mikrofilmden tahsil edilen TL.")
     
     photocopy_a4_formal = models.IntegerField(default=0, verbose_name="A4 boyutunda resmi fotokopi sayısı.")
     photocopy_a3_formal = models.IntegerField(default=0, verbose_name="A3 boyutunda resmi fotokopi sayısı.")
@@ -42,21 +44,21 @@ class ReferenceServiceAnalytic(models.Model):
 
 
 
-    borrowed_books = models.IntegerField(default=0)
-    retired_books = models.IntegerField(default=0)
+    #borrowed_books = models.IntegerField(default=0)
+    #retired_books = models.IntegerField(default=0)
 
-    photocopy = models.IntegerField(default=0)
-    record_date = models.DateTimeField()
-    date = models.DateField()
+    #photocopy = models.IntegerField(default=0)
+    #record_date = models.DateTimeField()
+    date = models.DateField( verbose_name="Kaydın girildiği tarih")
 
     def __str__(self):
-        return str(self.record_date)
+        return str(self.date)
 
     def is_minus_value_entered(self):
         return (int(self.user_from_out)       < 0 or 
             int(self.user_from_inside)    < 0 or
             int(self.online_user_inside)  < 0 or
             int(self.online_user_outside) < 0 or
-            int(self.borrowed_books)      < 0 or
-            int(self.retired_books)       < 0 or
-            int(self.photocopy)           < 0)
+            int(self.open_access_session_count)      < 0 or
+            int(self.depo_used_book)       < 0 or
+            int(self.depo_used_journal)           < 0)
