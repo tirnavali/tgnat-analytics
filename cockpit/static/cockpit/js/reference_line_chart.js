@@ -8,7 +8,7 @@ let rafined_data = "";
 
 const data_preprocess = function (data) {
   //Bu veriyi sıralı almak gerkecek sorun burada
-  rafined_data = data.map((d) =>( {date: d3.timeParse('%Y-%m-%d')(d.date), value : d.photocopy }))};
+  rafined_data = data.map((d) =>( {date: d3.timeParse('%Y-%m-%d')(d.date), value : d.user_from_inside }))};
 
 
   // return { date: d3.timeParse("%Y-%m-%d")(d.date), value: d.photocopy };
@@ -26,7 +26,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
 
   const yScale = d3
     .scaleLinear()
-    .domain(d3.extent(datas, (d) => d.photocopy))
+    .domain(d3.extent(datas, (d) => d.user_from_inside))
     .range([height - padding, padding]);
 
   const xScale = d3
@@ -36,7 +36,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
 
   const radiusScale = d3
     .scaleLinear()
-    .domain(d3.extent(datas, (d) => d.photocopy))
+    .domain(d3.extent(datas, (d) => d.user_from_inside))
     .range([2, 15]);
 
   const xAxis = d3
@@ -89,7 +89,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .attr("y", height - padding)
     .attr("dy", "2.5em")
     .style("text-anchor", "middle")
-    .text("Tarihe göre çekilen fotokopi sayısındaki değişim");
+    .text("Tarihe göre gelen kullanıcı sayısındaki değişim");
 
   d3.select("svg")
   .append("text")
@@ -98,7 +98,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
   .attr("y", padding )
   .attr("dy", "2.5em")
   .style("text-anchor", "left")
-  .text("Fotokopi sayısı")
+  .text("Kütüphaneye gelen kullanıcı sayısı")
 });
 
 let datas = "";
