@@ -5,7 +5,7 @@ const padding = 50;
 d3.json("http://localhost:8000/api/referans/").then(function (datas) {
   const yScale = d3
     .scaleLinear()
-    .domain(d3.extent(datas, (d) => d.borrowed_books))
+    .domain(d3.extent(datas, (d) => d.book_on_loan))
     .range([height - padding, padding]);
   const xScale = d3
     .scaleLinear()
@@ -14,7 +14,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
 
   const radiusScale = d3
     .scaleLinear()
-    .domain(d3.extent(datas, (d) => d.borrowed_books))
+    .domain(d3.extent(datas, (d) => d.book_on_loan))
     .range([2, 15]);
   
   const xAxis = d3
@@ -44,8 +44,8 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .enter()
     .append("circle")
     .attr("cx", (d) => xScale(d.user_from_inside))
-    .attr("cy", (d) => yScale(d.borrowed_books))
-    .attr("r", (d) => radiusScale(d.borrowed_books));
+    .attr("cy", (d) => yScale(d.book_on_loan))
+    .attr("r", (d) => radiusScale(d.book_on_loan));
 
   d3.select("svg")
     .append("text")
