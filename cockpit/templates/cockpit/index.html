@@ -18,12 +18,14 @@
     <div class="ml-2">
     <th scope="col">Kayıt</th>
     <th class="text-right" scope="col">Dış kullanıcı</th>
-    <th class="text-right" scope="col">İç Kullanıcı</th>
+    <th class="text-right" scope="col">İç kullanıcı</th>
     <th class="text-right">Online dış kullanıcı</th>
     <th class="text-right">Online iç kullanıcı</th>
-    <th class="text-right">Ödünç Alınan kitap</th>
-    <th class="text-right">İade Edilen kitap</th>
-    <th class="text-right">Fotokopi Adet</th>
+    <th class="text-right">A.E. Oturum</th>
+    <th class="text-right">Depodan çıkan kitap</th>
+    <th class="text-right">Depodan çıkan dergi</th>
+    <th class="text-right">Depodan çıkan gazete</th>
+
     <th class="text-right">Tarih</th>
     <th></th>
     <th></th>
@@ -39,9 +41,10 @@
         <td class="text-right">{{data.user_from_inside}}</td>
         <td class="text-right">{{data.online_user_outside}}</td>
         <td class="text-right">{{data.online_user_inside}}</td>
-        <td class="text-right">{{data.borrowed_books}}</td>
-        <td class="text-right">{{data.retired_books}}</td>
-        <td class="text-right">{{data.photocopy}}</td>
+        <td class="text-right">{{data.open_access_session_count}}</td>
+        <td class="text-right">{{data.depo_used_book}}</td>
+        <td class="text-right">{{data.depo_used_journal}}</td>
+        <td class="text-right">{{data.depo_used_newspaper}}</td>
         <td class="text-right">{{data.date|date:"M Y"}}</td>
         {%  if user.is_authenticated %}
         <td><a href="{% url 'edit_reference' data.pk %}">Düzenle</a></td>

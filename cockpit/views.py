@@ -38,7 +38,7 @@ def index(request):
     """ 
     ReferenceServiceAnalytic modelinin index sayfası.
     """
-    latest_data_list = ReferenceServiceAnalytic.objects.order_by('-record_date')
+    latest_data_list = ReferenceServiceAnalytic.objects.order_by('-date')
     data = serialize('json', ReferenceServiceAnalytic.objects.all())
     context = { 'latest_data_list'  : latest_data_list,
                 'modul_baslik'      :"Referans Hizmetleri Analitikleri",
