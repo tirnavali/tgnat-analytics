@@ -15,7 +15,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
   const radiusScale = d3
     .scaleLinear()
     .domain(d3.extent(datas, (d) => d.book_on_loan))
-    .range([2, 15]);
+    .range([2, 20]);
   
   const xAxis = d3
     .axisBottom(xScale)
@@ -62,7 +62,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
     .attr("y", height - padding)
     .attr("dy", "1.5em")
     .style("text-anchor", "middle")
-    .text("Tüm zamanlarda gelen iç kullanıcı sayısı ile ödünç verilen kitap sayısı ilişkisi");
+    .text("Tüm zamanlarda gelen kullanıcı sayısı ile ödünç verilen kitap sayısı ilişkisi");
 });
 
 let datas = "";

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
 from django.views.generic import DetailView
@@ -20,6 +22,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+@login_required
 def reference_api(request):
     """ Reference model verisini json olarak gönderir."""
     data2 = ReferenceServiceAnalytic.objects.all().values()
@@ -75,7 +78,7 @@ class RefAnalyticsFormView(View):
     template_name = 'cockpit/new_record_ref.html'
     
     obj = ReferenceServiceAnalytic()
-
+    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         """
         url : 'referans/yeni/'
@@ -97,19 +100,20 @@ class RefAnalyticsFormView(View):
 
         # düzenleme get işlemi
         if pk:
+            print("PK VAR")
             try:
+                print("ANAHAT : {}".format(pk))
                 self.obj = ReferenceServiceAnalytic.objects.get(pk=pk)
                 initial = { 'user_from_out' : self.obj.user_from_out,
                             'user_from_inside' :self.obj.user_from_inside,
                             'online_user_outside': self.obj.online_user_outside,
                             'online_user_inside': self.obj.online_user_inside,
-                            'borrowed_books': self.obj.borrowed_books,
-                            'retired_books': self.obj.retired_books,
-                            'photocopy': self.obj.photocopy,
-                            'record_date': self.obj.record_date}
-                form = ReferenceAnalyticForm(initial = initial)
+                            'date': self.obj.date}
+                form = ReferenceForm(instance = self.obj)
+                print(form)
                 return render(request, self.template_name, {'form': form})
             except:
+                
                 return HttpResponse("Böyle bir sayfa yok")
 
             print("NESNEYİ BUL VE FORMA BAS")
@@ -117,7 +121,7 @@ class RefAnalyticsFormView(View):
         else:
             form = self.form
             return render(request, self.template_name, {'form': form})
-
+    @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         """
         Bu fonksiyona hem düzenleme hem de yeni veri kaydetme isteği gelebilir.

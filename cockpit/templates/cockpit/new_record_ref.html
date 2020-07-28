@@ -1,6 +1,7 @@
-{% include 'cockpit/header.html' %}
+{% extends 'cockpit/base.html' %}
 {% load static %}
 
+{% block content %}
 <div class="container bg-light">
     <h1>Yeni referans birimi verisi ekleme formu</h1>
 {% if errors %}
@@ -12,9 +13,9 @@
     <table class="table table-striped" >
     {{ form }}
     </table>
-    <input class="btn btn-primary" type="submit" >
+    <input class="btn btn-primary" type="submit" value="Kaydet" >
     
 </form>
 
 </div>
-{% include 'cockpit/footer.html' %}
+{% endblock %}
