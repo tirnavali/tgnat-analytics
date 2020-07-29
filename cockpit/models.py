@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class ReferenceServiceAnalytic(models.Model):
@@ -39,6 +40,10 @@ class ReferenceServiceAnalytic(models.Model):
     photocopy_income = models.FloatField(default = 0, verbose_name="Fotokopiden tahsil edilen TL.")
 
     notes = models.TextField(max_length=1500, blank=True, verbose_name="Ekstra not alanı.")
+    reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
+    reporter_title = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
+    report_date = models.DateField(verbose_name="Raporun hazırlandığı tarih", default=timezone.now)
+
 
     #borrowed_books = models.IntegerField(default=0)
     #retired_books = models.IntegerField(default=0)
