@@ -42,7 +42,7 @@ class ReferenceServiceAnalytic(models.Model):
     notes = models.TextField(max_length=1500, blank=True, verbose_name="Ekstra not alanı.")
     reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
     reporter_title = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
-    report_date = models.DateField(verbose_name="Raporun hazırlandığı tarih", default=timezone.now)
+    report_date = models.DateField(verbose_name="Raporun hazırlandığı tarih (Otomatik oluşturulur.)", default=timezone.now)
 
 
     #borrowed_books = models.IntegerField(default=0)

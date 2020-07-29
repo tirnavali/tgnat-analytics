@@ -28,34 +28,41 @@
             </td>
             <td class="text-right">{{ user_from_out__sum}}</td>
             <td class="text-right">%{{ referenceserviceanalytic.user_from_out|percantage:user_from_out__sum}}</td>
-            <td>zz</td>
-            
+            <td>zz</td>            
           </tr>
+
           <tr>
             <td scope="row">Tüm kullanıcılar</td>
             <td class="text-right">
               {{ referenceserviceanalytic.user_from_inside }}
             </td>
             <td class="text-right">{{ user_from_inside__sum}}</td>
-            
+            <td class="text-right">%{{ referenceserviceanalytic.user_from_inside|percantage:user_from_inside__sum}}</td>
+          <td></td>
           </tr>
           <tr>
             <td scope="row">Online gelen dış kullanıcı</td>
             <td class="text-right">
               {{ referenceserviceanalytic.online_user_outside }}
             </td>
+            <td class="text-right">{{ online_user_outside__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.online_user_outside|percantage:online_user_outside__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Online gelen iç kullanıcı </td>
             <td class="text-right">
               {{ referenceserviceanalytic.online_user_inside }}
             </td>
+            <td class="text-right">{{ online_user_inside__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.online_user_inside|percantage:online_user_inside__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Açık erişim sisteminde açılan oturum</td>
             <td class="text-right">
               {{referenceserviceanalytic.open_access_session_count}}
             </td>
+            <td class="text-right">{{ open_access_session_count__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.open_access_session_count|percantage:open_access_session_count__sum}}</td>
           </tr>
 
           <tr>
@@ -63,6 +70,9 @@
             <td class="text-right">
               {{referenceserviceanalytic.microfilm_use_mp}}
             </td>
+            <td class="text-right">{{ microfilm_use_mp__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.microfilm_use_mp|percantage:microfilm_use_mp__sum}}</td>
+            
           </tr>
           
           <tr>
@@ -70,6 +80,9 @@
             <td class="text-right">
               {{referenceserviceanalytic.microfilm_use_retired_mp}}
             </td>
+            <td class="text-right">{{ microfilm_use_retired_mp__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.microfilm_use_retired_mp|percantage:microfilm_use_retired_mp__sum}}</td>
+            
           </tr>
           
           <tr>
@@ -77,6 +90,8 @@
             <td class="text-right">
               {{referenceserviceanalytic.microfilm_use_patron_inside}}
             </td>
+            <td class="text-right">{{ microfilm_use_patron_inside__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.microfilm_use_patron_inside|percantage:microfilm_use_patron_inside__sum}}</td>
           </tr>
 
           <tr>
@@ -84,6 +99,8 @@
             <td class="text-right">
               {{referenceserviceanalytic.microfilm_use_patron_outside}}
             </td>
+            <td class="text-right">{{ microfilm_use_patron_outside__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.microfilm_use_patron_outside|percantage:microfilm_use_patron_outside__sum}}</td>
           </tr>
 
 
@@ -93,18 +110,24 @@
             <td class="text-right">
               {{referenceserviceanalytic.depo_used_book}}
             </td>
+            <td class="text-right">{{ depo_used_book__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.depo_used_book|percantage:depo_used_book__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Depodan çıkan dergi </td>
             <td class="text-right">
               {{referenceserviceanalytic.depo_used_journal}}
             </td>
+            <td class="text-right">{{ depo_used_journal__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.depo_used_journal|percantage:depo_used_journal__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Depodan çıkan gazete </td>
             <td class="text-right">
               {{referenceserviceanalytic.depo_used_newspaper}}
             </td>
+            <td class="text-right">{{ depo_used_newspaper__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.depo_used_newspaper|percantage:depo_used_newspaper__sum}}</td>
           </tr>
 
 
@@ -116,18 +139,23 @@
               {{referenceserviceanalytic.book_on_loan}}
             </td>
             <td class="text-right">{{ book_on_loan__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.book_on_loan|percantage:book_on_loan__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Süresi uzatılan kitap </td>
             <td class="text-right">
               {{referenceserviceanalytic.book_renew}}
             </td>
+            <td class="text-right">{{ book_renew__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.book_renew|percantage:book_renew__sum}}</td>
           </tr>
           <tr>
             <td scope="row">İade edilen kitap </td>
             <td class="text-right">
               {{referenceserviceanalytic.book_withdraw}}
             </td>
+            <td class="text-right">{{ book_withdraw__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.book_withdraw|percantage:book_withdraw__sum}}</td>
           </tr>
 
 
@@ -136,18 +164,24 @@
             <td class="text-right">
               {{referenceserviceanalytic.book_on_loan_mp}}
             </td>
+            <td class="text-right">{{ book_on_loan_mp__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.book_on_loan_mp|percantage:book_on_loan_mp__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Emekli vekillere ödünç verilen kitap </td>
             <td class="text-right">
               {{referenceserviceanalytic.book_on_loan_retired_mp}}
             </td>
+            <td class="text-right">{{ book_on_loan_retired_mp__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.book_on_loan_retired_mp|percantage:book_on_loan_retired_mp__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Personele ödünç verilen kitap </td>
             <td class="text-right">
               {{referenceserviceanalytic.book_on_loan_patron_inside}}
             </td>
+            <td class="text-right">{{ book_on_loan_patron_inside__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.book_on_loan_patron_inside|percantage:book_on_loan_patron_inside__sum}}</td>
           </tr>
           
           <tr>
