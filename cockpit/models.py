@@ -35,8 +35,8 @@ class ReferenceServiceAnalytic(models.Model):
     photocopy_a3_formal = models.IntegerField(default=0, verbose_name="A3 boyutunda resmi fotokopi sayısı.")
     photocopy_a4_paid = models.IntegerField(default=0, verbose_name="A4 boyutunda ücreti ödenmiş fotokopi sayısı.")
     photocopy_a3_paid = models.IntegerField(default=0, verbose_name="A3 boyutunda ücreti ödenmiş fotokopi sayısı.")
-    photocopy_income = models.FloatField(default = 0, verbose_name="Fotokopiden tahsil edilen TL.")
     dijitalized_papers = models.IntegerField(default = 0, verbose_name="Dijital kopya sayısı.")
+    photocopy_income = models.FloatField(default = 0, verbose_name="Fotokopiden tahsil edilen TL.")
 
     notes = models.TextField(max_length=1500, blank=True, verbose_name="Ekstra not alanı.")
 
@@ -45,7 +45,7 @@ class ReferenceServiceAnalytic(models.Model):
     #photocopy = models.IntegerField(default=0)
     #record_date = models.DateTimeField()
 
-    date = models.DateField( verbose_name="Kaydın girildiği tarih")
+    date = models.DateField( verbose_name="Raporun ait olduğu tarih")
 
     def __str__(self):
         return str(self.date)+" Tarihli Kayıt."

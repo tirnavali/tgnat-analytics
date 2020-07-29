@@ -1,56 +1,222 @@
-{% include 'cockpit/header.html' %} {% load my_tags %}
+{% extends 'cockpit/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block content %}
+<p>{{ now }}</p>
 <div class="container">
   <div class="row justify-content-center">
     <div class="card">
       <div class="card-header bg-info">
-        <h2>{{ referenceserviceanalytic.date|date:"F Y"}} tarihli kayıt
-        detayları</h2>
+        <h2>{{ referenceserviceanalytic.date|date:"F Y"}} tarihli danışma birimi faaliyet raporu</h2>
       </div>
 
-      <table class="table ">
+      <table class="table table-sm striped">
+        <thead class="">
+          <th colspan="2">{{ referenceserviceanalytic.date|date:"F Y" }}</th>
+          <th class="text-right">{{ referenceserviceanalytic.date|date:"Y"}}</th>
+          <th class="text-right">Yüzde</th>
+          <th>Yasama yılı</th>
+
+        </thead>
         <tbody>
+          <tr class=""><th colspan="5" class="bg-warning">Kullanıcı istatistikleri</th></tr>
           <tr>
-            <th class="" scope="row">Dışarıdan gelen kullanıcı sayısı</th>
+            <td class="" scope="row">Dışarıdan gelen kullanıcı </td>
             <td class="text-right">
               {{ referenceserviceanalytic.user_from_out|rjust:"100"}}
             </td>
+            <td class="text-right">{{ user_from_out__sum}}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.user_from_out|percantage:user_from_out__sum}}</td>
+            <td>zz</td>
             
           </tr>
           <tr>
-            <th scope="row">Kurum içi gelen kullanıcı sayısı</th>
+            <td scope="row">Tüm kullanıcılar</td>
             <td class="text-right">
               {{ referenceserviceanalytic.user_from_inside }}
             </td>
+            <td class="text-right">{{ user_from_inside__sum}}</td>
             
           </tr>
           <tr>
-            <th scope="row">Online gelen dış kullanıcı sayısı</th>
+            <td scope="row">Online gelen dış kullanıcı</td>
             <td class="text-right">
               {{ referenceserviceanalytic.online_user_outside }}
             </td>
           </tr>
           <tr>
-            <th scope="row">Online gelen iç kullanıcı sayısı</th>
+            <td scope="row">Online gelen iç kullanıcı </td>
             <td class="text-right">
               {{ referenceserviceanalytic.online_user_inside }}
             </td>
           </tr>
           <tr>
-            <th scope="row">Ödünç verilen kitap sayısı</th>
+            <td scope="row">Açık erişim sisteminde açılan oturum</td>
             <td class="text-right">
-              {{referenceserviceanalytic.borrowed_books}}
+              {{referenceserviceanalytic.open_access_session_count}}
+            </td>
+          </tr>
+
+          <tr>
+            <td scope="row">Mikrofilm kullanan vekil </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.microfilm_use_mp}}
+            </td>
+          </tr>
+          
+          <tr>
+            <td scope="row">Mikrofilm kullanan emekli vekil </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.microfilm_use_retired_mp}}
+            </td>
+          </tr>
+          
+          <tr>
+            <td scope="row">Mikrofilm kullanan kurum içi personel </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.microfilm_use_patron_inside}}
+            </td>
+          </tr>
+
+          <tr>
+            <td scope="row">Mikrofilm kullanan kurum dışı personel </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.microfilm_use_patron_outside}}
+            </td>
+          </tr>
+
+
+          <tr><th colspan="4" class="bg-warning">Depo hareketleri</th></tr>
+          <tr>
+            <td scope="row">Depodan çıkan kitap </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.depo_used_book}}
             </td>
           </tr>
           <tr>
-            <th scope="row">İade edilen kitap sayısı</th>
+            <td scope="row">Depodan çıkan dergi </td>
             <td class="text-right">
-              {{referenceserviceanalytic.retired_books}}
+              {{referenceserviceanalytic.depo_used_journal}}
             </td>
           </tr>
           <tr>
-            <th scope="row">Çekilen fotokopi sayısı</th>
-            <td class="text-right">{{referenceserviceanalytic.photocopy}}</td>
+            <td scope="row">Depodan çıkan gazete </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.depo_used_newspaper}}
+            </td>
           </tr>
+
+
+          
+          <tr><th colspan="4" class="bg-warning">Ödünç verme işlemleri</th></tr>
+          <tr>
+            <td scope="row">Ödünç verilen kitap </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.book_on_loan}}
+            </td>
+            <td class="text-right">{{ book_on_loan__sum }}</td>
+          </tr>
+          <tr>
+            <td scope="row">Süresi uzatılan kitap </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.book_renew}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">İade edilen kitap </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.book_withdraw}}
+            </td>
+          </tr>
+
+
+          <tr>
+            <td scope="row">Vekillere ödünç verilen kitap </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.book_on_loan_mp}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">Emekli vekillere ödünç verilen kitap </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.book_on_loan_retired_mp}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">Personele ödünç verilen kitap </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.book_on_loan_patron_inside}}
+            </td>
+          </tr>
+          
+          <tr>
+            <td scope="row">Kitap ödünç verilen vekil </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.mp_count_for_book_use}}
+            </td>
+          </tr>
+          
+          <tr>
+            <td scope="row">Kitap ödünç verilen emekli vekil </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.retired_mp_count_book_use}}
+            </td>
+          </tr>
+          
+          <tr>
+            <td scope="row">Kitap ödünç verilen kurum içi kullanıcı </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.inside_patron_count_book_use}}
+            </td>
+          </tr>
+          <tr><th colspan="4" class="bg-warning">Çoğaltma işlemleri</th></tr>
+          <tr>
+            <td scope="row">A4 boyutunda resmi fotokopi</td>
+            <td class="text-right">
+              {{referenceserviceanalytic.photocopy_a4_formal}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">A3 boyutunda resmi fotokopi</td>
+            <td class="text-right">
+              {{referenceserviceanalytic.photocopy_a3_formal}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">A4 boyutunda ücreti ödenmiş fotokopi </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.photocopy_a4_paid}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">A3 boyutunda ücreti ödenmiş fotokopi </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.photocopy_a3_paid}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">Dijital kopyalama </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.dijitalized_papers}}
+            </td>
+          </tr>
+
+          <tr><th colspan="4" class="bg-warning">Tahsilat (TL)</th></tr>
+          
+          <tr>
+            <td scope="row">Fotokopi, Baskı </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.photocopy_income}}
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">Dijital Bölümü, Mikrofilm </td>
+            <td class="text-right">
+              {{referenceserviceanalytic.microfilm_income}}
+            </td>
+          </tr>
+
         </tbody>
       </table>
       <div class="card-footer">
@@ -73,5 +239,5 @@
     </div>
   </div>
 </div>
+{% endblock %}
 
-{% include 'cockpit/footer.html' %}

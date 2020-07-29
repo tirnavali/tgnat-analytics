@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
 from django.views.generic import DetailView
+from django.db.models import Sum
 from .models import ReferenceServiceAnalytic
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
@@ -196,4 +198,52 @@ class RefAnalyticsDetailView(DetailView):
     """
     ReferenceServiceAnalytic modeli için ayrıntılar sayfası oluşturur.
     """
+    #ReferenceServiceAnalytic.objects.filter(date__year="2020").aggregate(Sum('book_on_loan'))
+    #Detail view kısmına urlden gelen nesne
+    obj = None
     model = ReferenceServiceAnalytic
+ 
+    def get_object(self):
+        self.obj = super().get_object()
+        # Record the last accessed date
+        #obj.last_accessed = timezone.now()
+        #obj.save()
+        return self.obj
+
+    def get_context_data(self, **kwargs):
+        year = self.obj.date.year
+        query_objects  = ReferenceServiceAnalytic.objects.filter(date__year=year)
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        context.update(query_objects.aggregate(Sum('user_from_out')))
+        context.update(query_objects.aggregate(Sum('user_from_inside')))
+        context.update(query_objects.aggregate(Sum('online_user_outside')))
+        context.update(query_objects.aggregate(Sum('online_user_inside')))
+        context.update(query_objects.aggregate(Sum('open_access_session_count')))
+        context.update(query_objects.aggregate(Sum('depo_used_book')))
+        context.update(query_objects.aggregate(Sum('depo_used_journal')))
+        context.update(query_objects.aggregate(Sum('depo_used_newspaper')))
+
+        context.update(query_objects.aggregate(Sum('book_on_loan')))
+        context.update(query_objects.aggregate(Sum('book_renew')))
+        context.update(query_objects.aggregate(Sum('book_withdraw')))
+        context.update(query_objects.aggregate(Sum('book_on_loan_mp')))
+        context.update(query_objects.aggregate(Sum('book_on_loan_retired_mp')))
+        context.update(query_objects.aggregate(Sum('book_on_loan_patron_inside')))
+        context.update(query_objects.aggregate(Sum('mp_count_for_book_use')))
+        context.update(query_objects.aggregate(Sum('retired_mp_count_book_use')))
+        context.update(query_objects.aggregate(Sum('inside_patron_count_book_use')))
+        context.update(query_objects.aggregate(Sum('retired_mp_count_book_use')))
+
+        context.update(query_objects.aggregate(Sum('microfilm_use_mp')))
+        context.update(query_objects.aggregate(Sum('microfilm_use_retired_mp')))
+        context.update(query_objects.aggregate(Sum('microfilm_use_patron_inside')))
+        context.update(query_objects.aggregate(Sum('microfilm_use_patron_outside')))
+
+        context.update(query_objects.aggregate(Sum('microfilm_income')))
+        context.update(query_objects.aggregate(Sum('photocopy_a4_formal')))
+        context.update(query_objects.aggregate(Sum('photocopy_a3_formal')))
+        context.update(query_objects.aggregate(Sum('photocopy_a4_paid')))
+        context.update(query_objects.aggregate(Sum('photocopy_a3_paid')))
+        context.update(query_objects.aggregate(Sum('photocopy_income')))     
+        return context
