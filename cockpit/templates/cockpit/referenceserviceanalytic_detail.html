@@ -189,6 +189,8 @@
             <td class="text-right">
               {{referenceserviceanalytic.mp_count_for_book_use}}
             </td>
+            <td class="text-right">{{ mp_count_for_book_use__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.mp_count_for_book_use|percantage:mp_count_for_book_use__sum}}</td>
           </tr>
           
           <tr>
@@ -196,6 +198,8 @@
             <td class="text-right">
               {{referenceserviceanalytic.retired_mp_count_book_use}}
             </td>
+            <td class="text-right">{{ retired_mp_count_book_use__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.retired_mp_count_book_use|percantage:retired_mp_count_book_use__sum}}</td>
           </tr>
           
           <tr>
@@ -203,6 +207,8 @@
             <td class="text-right">
               {{referenceserviceanalytic.inside_patron_count_book_use}}
             </td>
+            <td class="text-right">{{ inside_patron_count_book_use__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.inside_patron_count_book_use|percantage:inside_patron_count_book_use__sum}}</td>
           </tr>
           <tr><th colspan="4" class="bg-warning">Çoğaltma işlemleri</th></tr>
           <tr>
@@ -210,30 +216,40 @@
             <td class="text-right">
               {{referenceserviceanalytic.photocopy_a4_formal}}
             </td>
+            <td class="text-right">{{ photocopy_a4_formal__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.photocopy_a4_formal|percantage:photocopy_a4_formal__sum}}</td>
           </tr>
           <tr>
             <td scope="row">A3 boyutunda resmi fotokopi</td>
             <td class="text-right">
               {{referenceserviceanalytic.photocopy_a3_formal}}
             </td>
+            <td class="text-right">{{ photocopy_a3_formal__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.photocopy_a3_formal|percantage:photocopy_a3_formal__sum}}</td>
           </tr>
           <tr>
             <td scope="row">A4 boyutunda ücreti ödenmiş fotokopi </td>
             <td class="text-right">
               {{referenceserviceanalytic.photocopy_a4_paid}}
             </td>
+            <td class="text-right">{{ photocopy_a4_paid__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.photocopy_a4_paid|percantage:photocopy_a4_paid__sum}}</td>
           </tr>
           <tr>
             <td scope="row">A3 boyutunda ücreti ödenmiş fotokopi </td>
             <td class="text-right">
               {{referenceserviceanalytic.photocopy_a3_paid}}
             </td>
+            <td class="text-right">{{ photocopy_a3_paid__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.photocopy_a3_paid|percantage:photocopy_a3_paid__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Dijital kopyalama </td>
             <td class="text-right">
               {{referenceserviceanalytic.dijitalized_papers}}
             </td>
+            <td class="text-right">{{ dijitalized_papers__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.dijitalized_papers|percantage:dijitalized_papers__sum}}</td>
           </tr>
 
           <tr><th colspan="4" class="bg-warning">Tahsilat (TL)</th></tr>
@@ -243,12 +259,16 @@
             <td class="text-right">
               {{referenceserviceanalytic.photocopy_income}}
             </td>
+            <td class="text-right">{{ photocopy_income__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.photocopy_income|percantage:photocopy_income__sum}}</td>
           </tr>
           <tr>
             <td scope="row">Dijital Bölümü, Mikrofilm </td>
             <td class="text-right">
               {{referenceserviceanalytic.microfilm_income}}
             </td>
+            <td class="text-right">{{ microfilm_income__sum }}</td>
+            <td class="text-right">%{{ referenceserviceanalytic.microfilm_income|percantage:microfilm_income__sum}}</td>
           </tr>
 
         </tbody>

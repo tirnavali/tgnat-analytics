@@ -245,5 +245,6 @@ class RefAnalyticsDetailView(DetailView):
         context.update(query_objects.aggregate(Sum('photocopy_a3_formal')))
         context.update(query_objects.aggregate(Sum('photocopy_a4_paid')))
         context.update(query_objects.aggregate(Sum('photocopy_a3_paid')))
+        context.update(query_objects.aggregate(Sum('dijitalized_papers')))
         context.update(query_objects.aggregate(Sum('photocopy_income')))     
         return context
