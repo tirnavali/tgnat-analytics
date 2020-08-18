@@ -132,6 +132,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = './main_static' # collectstatic komutu ile oluşturulan dosya sunucu tarafından servis edilecek
+# python manage.py findstatic cockpit/js/myapp.js --verbosity 2
+STATICFILES_FINDERS = [
+    'npm.finders.NpmFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+    ]
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'node_modules'),
+]
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"

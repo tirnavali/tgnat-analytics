@@ -175,6 +175,7 @@ class RefAnalyticsFormView(View):
             model_data.photocopy_a3_formal = form.cleaned_data['photocopy_a3_formal']
             model_data.photocopy_a4_paid = form.cleaned_data['photocopy_a4_paid']
             model_data.photocopy_a3_paid = form.cleaned_data['photocopy_a3_paid']
+            model_data.dijitalized_papers = form.cleaned_data['dijitalized_papers']
             model_data.photocopy_income = form.cleaned_data['photocopy_income']
             model_data.notes = form.cleaned_data['notes']
             model_data.date = form.cleaned_data['date']

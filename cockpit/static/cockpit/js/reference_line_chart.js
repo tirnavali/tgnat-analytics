@@ -1,4 +1,5 @@
 `Bu dosya reference_chart.html sayfasındaki d3.js görsellerini oluşturmaktadır.`;
+
 const margin = { top: 10, right: 30, bottom: 30, left: 60 };
 const width = 1200;
 const height = 750;
@@ -12,6 +13,7 @@ const data_preprocess = function (data) {
 
 
   // return { date: d3.timeParse("%Y-%m-%d")(d.date), value: d.photocopy };
+
 
 
 d3.json("http://localhost:8000/api/referans/").then(function (datas) {
@@ -100,6 +102,7 @@ d3.json("http://localhost:8000/api/referans/").then(function (datas) {
   .style("text-anchor", "left")
   .text("Kütüphaneye gelen kullanıcı sayısı")
 });
+
 
 let datas = "";
 // const  XHR = new XMLHttpRequest();

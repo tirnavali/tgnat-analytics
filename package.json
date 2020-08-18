@@ -1,0 +1,23 @@
+{
+  "name": "tbmm_analytics",
+  "version": "1.0.0",
+  "description": "tbmm_analytics npm file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tirnavali/tbmm-analytics.gi.git"
+  },
+  "author": "sercan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tirnavali/tbmm-analytics.gi/issues"
+  },
+  "homepage": "https://github.com/tirnavali/tbmm-analytics.gi#readme",
+  "dependencies": {
+    "d3": "^5.16.0",
+    "d3-fetch": "^1.2.0"
+  }
+}
