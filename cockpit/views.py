@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.db.models import Sum
 from .models import ReferenceServiceAnalytic
 from rest_framework import viewsets
@@ -23,6 +23,28 @@ class UserViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+##########################################################################
+
+def saglama_index(request):
+    return render(request,'cockpit/saglama_index.html', locals())
+
+
+class SaglamaListView(ListView):
+    model = ReferenceServiceAnalytic
+
+
+
+class SaglamaFormView(View):
+
+    form = SaglamaForm()
+    template_name = 'cockpit/saglama_yeni.html'
+
+    def get(self, request):
+        form = self.form
+        return render(request, self.template_name, locals())
+
+##########################################################################
 
 @login_required
 def reference_api(request):
@@ -68,6 +90,7 @@ class MarketingPage(View):
     def get(self, request):
         return render(request, 'cockpit/marketing.html', locals())
 
+##########################################################################
 
 class RefAnalyticsFormView(View):
     """

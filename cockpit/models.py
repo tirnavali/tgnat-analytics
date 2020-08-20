@@ -2,6 +2,48 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+
+class SaglamaReport(models.Model):
+    reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
+    reporter_title = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
+    date = models.DateField( verbose_name="Raporun ait olduğu tarih")
+
+
+class PubType(models.Model):
+    publication_type = models.CharField(max_length=60, verbose_name="Yayın türü (Kitap, dergi, gazete)")
+
+    def __str__(self):
+        return self.publication_type
+
+
+class SaglamaAnalytic(models.Model):
+    pub_type = models.ForeignKey(PubType, on_delete=models.CASCADE, verbose_name="Yayın türü (Kitap, dergi, gazete)")
+    report = models.ForeignKey(SaglamaReport, on_delete=models.CASCADE, verbose_name="Sağlama raporu:")
+   
+
+    pub_arrived_as_supply = models.IntegerField(default=0, verbose_name="Derlemeden gelen yayın sayısı.")
+    pub_arrived_as_gift = models.IntegerField(default=0, verbose_name="Hediye gelen yayın sayısı.")
+    pub_bought = models.IntegerField(default=0, verbose_name="Satın alınan yayın sayısı.")
+    
+    pub_saved_as_supply = models.IntegerField(default=0, verbose_name="Derlemeden koleksiyona alınan yayın sayısı.")
+    pub_saved_as_gift = models.IntegerField(default=0, verbose_name="Hediyelerden koleksiyona alınan yayın sayısı.")
+    #pub_saved_as_bought = = models.IntegerField(default=0, verbose_name="Satın alınıp koleksiyona giren yayın sayısı.")
+    pub_saved_as_old = models.IntegerField(default=0, verbose_name="Eski etiketiyle koleksiyona alınan yayın sayısı.")
+
+    
+   
+
+    notes = models.TextField(max_length=1500, blank=True, verbose_name="Ekstra not alanı.")
+    
+    report_date = models.DateField(verbose_name="Raporun hazırlandığı tarih (Otomatik oluşturulur.)", default=timezone.now)
+    date = models.DateField( verbose_name="Raporun ait olduğu tarih")
+
+    def __str__(self):
+        return str(self.date) + " Tarihli rapor"
+
+
+
+
 class ReferenceServiceAnalytic(models.Model):
     user_from_out = models.IntegerField(default=0, verbose_name="Dışarıdan gelen kullanıcı sayısı.")
     user_from_inside = models.IntegerField(default=0, verbose_name="İçeriden gelen kullanıcı sayısı.")
@@ -43,14 +85,14 @@ class ReferenceServiceAnalytic(models.Model):
     reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
     reporter_title = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
     report_date = models.DateField(verbose_name="Raporun hazırlandığı tarih (Otomatik oluşturulur.)", default=timezone.now)
-
+    date = models.DateField( verbose_name="Raporun ait olduğu tarih")
 
     #borrowed_books = models.IntegerField(default=0)
     #retired_books = models.IntegerField(default=0)
     #photocopy = models.IntegerField(default=0)
     #record_date = models.DateTimeField()
 
-    date = models.DateField( verbose_name="Raporun ait olduğu tarih")
+    
 
     def __str__(self):
         return str(self.date)+" Tarihli Kayıt."

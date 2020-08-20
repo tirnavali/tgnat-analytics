@@ -1,0 +1,21 @@
+{% extends 'cockpit/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container bg-light">
+    <h1>Sağlama birimi verisi ekleme formu</h1>
+{% if errors %}
+<p>{{ errors }}</p>
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+       
+    <table class="table table-striped" >
+    {{ form }}
+    </table>
+    <input class="btn btn-primary" type="submit" value="Kaydet" >
+    
+</form>
+
+</div>
+{% endblock %}

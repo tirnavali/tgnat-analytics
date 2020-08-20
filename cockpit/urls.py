@@ -9,6 +9,10 @@ urlpatterns = [
     path('referans/<int:pk>/duzenle/', views.RefAnalyticsFormView.as_view(), name='edit_reference'),
     path('referans/chart', views.reference_chart, name="reference_chart"),
     path('referans/line_chart', views.reference_line_chart, name='reference_line_chart'),
-    path('api/referans/', views.reference_api, name="reference-api")
+    path('api/referans/', views.reference_api, name="reference-api"),
+
+    path('saglama/', views.saglama_index, name='saglama_index'),
+    path('saglama/yeni', views.SaglamaFormView.as_view(), name='saglama_yeni'),
+
 ]
 
