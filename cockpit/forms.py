@@ -15,6 +15,19 @@ from .models import *
 #     record_date = forms.DateTimeField(label="Verilerin toplandığı tarih(ay)", 
 #         widget=forms.TextInput(attrs={'placeholder':'2019-01-30'}))
 
+class SaglamaReportForm(forms.ModelForm):
+    class Meta:
+        model = SaglamaReport
+        fields = '__all__'
+   
+        widgets = {
+                        
+            'date' : forms.DateInput(attrs={ 'class' : 'form-control' ,
+                                              'placeholder':'2019-01-30'}),
+        #     'notes' : forms.Textarea(attrs={ 'class' : 'form-control',
+        #     'cols': 80, 'rows': 3}),
+         }
+
 
 class SaglamaForm(forms.ModelForm):
     class Meta:

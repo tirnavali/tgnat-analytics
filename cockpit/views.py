@@ -8,21 +8,21 @@ from django.views import View
 from django.views.generic import DetailView, ListView
 from django.db.models import Sum
 from .models import ReferenceServiceAnalytic
-from rest_framework import viewsets
-from .serializers import UserSerializer, GroupSerializer
+#from rest_framework import viewsets
+#from .serializers import UserSerializer, GroupSerializer
 from django.contrib.auth.models import User, Group
 from cockpit.forms import *
 
 
 # Create your views here.
 
-class UserViewSet(viewsets.ModelViewSet):
+""" class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+    serializer_class = GroupSerializer """
 
 ##########################################################################
 
@@ -34,14 +34,42 @@ class SaglamaListView(ListView):
     model = ReferenceServiceAnalytic
 
 
+class SaglamaReportFormView(View):
+    # 1
+    form = SaglamaReportForm()
+    template_name = 'cockpit/saglama_report_yeni.html'
+    
+    
+    def get(self, request):
+        form = self.form
+        session = request.session.__dict__
+        return render(request, self.template_name, locals())
+    
+    def post(self, request):
+        saglama_report_form = SaglamaReportForm(request.POST)
+        
+        if saglama_report_form.is_valid():
+            saglama_report = saglama_report_form.save('''commit = False''')
+            print (saglama_report)
+            request.session['saglama_report_pk'] = saglama_report.id
+            return redirect("saglama_yeni_2")
+        else:
+            return HttpResponse("Form geçerli değil")
+        
+       
 
-class SaglamaFormView(View):
+class SaglamaAnalyticFormView(View):
+    # 2
 
     form = SaglamaForm()
     template_name = 'cockpit/saglama_yeni.html'
 
     def get(self, request):
+        saglama_report_pk = request.session["saglama_report_pk"]
         form = self.form
+        form = SaglamaForm(initial={ 'report' : saglama_report_pk })
+        form.fields['report'].widget.attrs['disabled'] = 'disabled' # UI için önceden seçili gelen seçenek değiştirilemesin. [ISS01] Ancak arka planda halen POST açığı var.
+        print(form)
         return render(request, self.template_name, locals())
 
 ##########################################################################

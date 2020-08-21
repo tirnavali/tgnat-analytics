@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class="container bg-light">
-    <h1>Sağlama birimi verisi ekleme formu</h1>
+    <h1>1 - Sağlama report birimi verisi ekleme formu</h1>
 {% if errors %}
 <p>{{ errors }}</p>
 {% endif %}
-{{ saglama_report_pk }}
+{{ session }}
 <form method="POST">
     {% csrf_token %}
        

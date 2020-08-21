@@ -8,6 +8,9 @@ class SaglamaReport(models.Model):
     reporter_title = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
     date = models.DateField( verbose_name="Raporun ait olduğu tarih")
 
+    def __str__(self):
+        return str(self.date)
+
 
 class PubType(models.Model):
     publication_type = models.CharField(max_length=60, verbose_name="Yayın türü (Kitap, dergi, gazete)")
