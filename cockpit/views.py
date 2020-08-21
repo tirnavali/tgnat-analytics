@@ -65,11 +65,14 @@ class SaglamaAnalyticFormView(View):
     template_name = 'cockpit/saglama_yeni.html'
 
     def get(self, request):
+        
         saglama_report_pk = request.session["saglama_report_pk"]
+        saglama_report = SaglamaReport.objects.get(id=saglama_report_pk)
+        print(saglama_report)
         form = self.form
         form = SaglamaForm(initial={ 'report' : saglama_report_pk })
         form.fields['report'].widget.attrs['disabled'] = 'disabled' # UI için önceden seçili gelen seçenek değiştirilemesin. [ISS01] Ancak arka planda halen POST açığı var.
-        print(form)
+        
         return render(request, self.template_name, locals())
 
 ##########################################################################

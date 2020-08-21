@@ -3,11 +3,15 @@
 
 {% block content %}
 <div class="container bg-light">
+    <div style="background-color: darksalmon">
+    <p>Ad Soyad : {{ saglama_report.reporter_identity }}</p>
+    <p>Ünvan: {{ saglama_report.reporter_title }} / Rapor Tarihi:  {{ saglama_report.date }}</p>
+    </div>
     <h1>Sağlama birimi verisi ekleme formu</h1>
 {% if errors %}
 <p>{{ errors }}</p>
 {% endif %}
-{{ saglama_report_pk }}
+
 <form method="POST">
     {% csrf_token %}
        
