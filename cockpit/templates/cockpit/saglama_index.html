@@ -1,1 +1,17 @@
-Sağlama index
+{% extends 'cockpit/base.html' %}
+{% load static %}
+{% block header %}
+<link
+      rel="stylesheet"
+      href="{% static 'cockpit/css/marketing_page.css' %}"
+    />
+
+{% endblock %}
+
+
+{% block content %}
+<h1>Sağlama index sayfası</h1>
+<a href="{% url 'saglama_yeni' %}">Ekle</a>
+{% endblock %}
+
+

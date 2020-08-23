@@ -27,7 +27,22 @@ class GroupViewSet(viewsets.ModelViewSet):
 ##########################################################################
 
 def saglama_index(request):
-    return render(request,'cockpit/saglama_index.html', locals())
+    baslik = "Sağlama birimi analitikleri"
+    return render(request, 'cockpit/saglama_index.html', locals())
+
+def saglama_new(request):
+    baslik = 'Yeni sağlama verisi formu'
+    if request.method == 'POST':
+        form_1 = SaglamaReportForm(request.POST)
+        if form_1.is_valid():
+            form_1.save()
+            form_2_show = True #form_1 kaydolduysa ikiyi göster
+            form_1_submit_show = False
+            return render(request, 'cockpit/saglama_report_yeni.html', locals())
+    elif request.method == 'GET':
+        form = SaglamaReportForm()
+        form_2 = SaglamaForm()
+        return render(request, 'cockpit/saglama_report_yeni.html', locals())
 
 
 class SaglamaListView(ListView):

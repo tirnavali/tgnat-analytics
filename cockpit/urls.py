@@ -12,7 +12,7 @@ urlpatterns = [
     path('api/referans/', views.reference_api, name="reference-api"),
 
     path('saglama/', views.saglama_index, name='saglama_index'),
-    path('saglama/yeni', views.SaglamaReportFormView.as_view(), name='saglama_yeni'),
+    path('saglama/yeni', views.saglama_new, name='saglama_yeni'),
     path('saglama/yeni-2', views.SaglamaAnalyticFormView.as_view(), name='saglama_yeni_2'),
 
 ]

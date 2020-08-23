@@ -17,6 +17,14 @@
     <input class="btn btn-primary" type="submit" value="Kaydet" >
     
 </form>
+<form method="POST">
+    {% csrf_token %}
+    <table class="table table-striped">
+        {{ form_2 }}
+    </table>
+    <input class="btn btn-primary" type="submit" value="Kaydet" >
+
+</form>
 
 </div>
 {% endblock %}
