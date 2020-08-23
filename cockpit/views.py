@@ -110,16 +110,11 @@ def new_record_ref(request):
     form = ReferenceAnalyticForm()
     return render(request, 'cockpit/new_record_ref.html', locals()) """
 
+##########################################################################
 
-class MarketingPage(View):
-    """
-    Web sitesine açılışta görünecek olan ilk sayfayı yüklemek ile sorumludur.
-    """
-    baslik = "Hoşgeldiniz"
-    
-
-    def get(self, request):
-        return render(request, 'cockpit/marketing.html', locals())
+def home_page(request):
+    baslik = 'Hoşgeldiniz'
+    return render(request, 'cockpit/home_page.html', locals())
 
 ##########################################################################
 
