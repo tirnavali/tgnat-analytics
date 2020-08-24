@@ -15,6 +15,17 @@ from .models import *
 #     record_date = forms.DateTimeField(label="Verilerin toplandığı tarih(ay)", 
 #         widget=forms.TextInput(attrs={'placeholder':'2019-01-30'}))
 
+class SaglamaAnalyticForm(forms.Form):
+
+    pub_type              = forms.ModelChoiceField(queryset = PubType.objects, label='Yayın türü:', help_text='100 characters max.')
+    #report                = forms.IntegerField(disabled = True)
+    pub_arrived_as_supply = forms.IntegerField(label='Derlemeden gelen yayın sayısı:')
+    pub_arrived_as_gift   = forms.IntegerField(label='Hediye gelen yayın sayısı:')
+    pub_bought            = forms.IntegerField(label='Satın alınan yayın sayısı:')
+    pub_saved_as_supply   = forms.IntegerField(label='Derlemeden koleksiyona alınan yayın sayısı:')
+    pub_saved_as_gift     = forms.IntegerField(label='Hediyelerden koleksiyona alınan yayın sayısı:')
+    pub_saved_as_old      = forms.IntegerField(label='Eski etiketiyle koleksiyona alınan yayın sayısı:')
+
 class SaglamaReportForm(forms.ModelForm):
     class Meta:
         model = SaglamaReport

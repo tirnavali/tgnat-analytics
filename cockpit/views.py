@@ -38,10 +38,13 @@ def saglama_new(request):
             form_1.save()
             form_2_show = True #form_1 kaydolduysa ikiyi göster
             form_1_submit_show = False
-            return render(request, 'cockpit/saglama_report_yeni.html', locals())
+            return HttpResponse(str(request.POST))
+            #return render(request, 'cockpit/saglama_report_yeni.html', locals())
     elif request.method == 'GET':
         form = SaglamaReportForm()
-        form_2 = SaglamaForm()
+        form_2 = SaglamaAnalyticForm(initial = {'pub_type' : 1})
+        form_3 = SaglamaAnalyticForm(initial = {'pub_type' : 2})
+        form_4 = SaglamaAnalyticForm(initial = {'pub_type' : 3})
         return render(request, 'cockpit/saglama_report_yeni.html', locals())
 
 
