@@ -9,3 +9,5 @@ SaglamaAnalytic.objects.filter(pub_type_id = 1)
 
 
 [ISS01] Ancak arka planda halen POST açığı var. --> views.py
+
+[ISS02] Chart butonlarında isim gelmiyor. --> reference_chart.py

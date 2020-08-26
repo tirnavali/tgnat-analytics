@@ -52,8 +52,13 @@
     </div>
   </nav>
   <h2 class="bg-secondary">{{modul_baslik}} 
+    {# eğer modül ismi gönderilirse göster aksi halde modül yoktur. #}
+    {% if  graph_name == None %}
+    {% else %}
     <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{{ graph_url}}">{{graph_name}}</a>
     <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{{ graph_2_url}}">{{graph_2_name}}</a>
+    {% endif %}
+    
   </h2>
   <div class="container-fluid ">
   {% block content %}

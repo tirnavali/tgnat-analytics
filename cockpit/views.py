@@ -119,7 +119,7 @@ def reference_line_chart(request):
 
 def index(request):
     """ 
-    ReferenceServiceAnalytic modelinin index sayfası.
+    ReferenceServiceAnalytic modelinin indeks sayfası.
     """
     latest_data_list = ReferenceServiceAnalytic.objects.order_by('-date')
     data = serialize('json', ReferenceServiceAnalytic.objects.all())
