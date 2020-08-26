@@ -85,7 +85,7 @@ class SaglamaAnalyticFormView(View):
     def get(self, request):
         
         saglama_report_pk = request.session["saglama_report_pk"]
-        saglama_report = SaglamaReport.objects.get(id=saglama_report_pk)
+        saglama_report = AcquisitionReport.objects.get(id=saglama_report_pk)
         print(saglama_report)
         form = self.form
         form = SaglamaForm(initial={ 'report' : saglama_report_pk })

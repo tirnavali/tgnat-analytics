@@ -3,10 +3,23 @@ from django.utils import timezone
 
 # Create your models here.
 
-class SaglamaReport(models.Model):
+# class SaglamaReport(models.Model):
+#     """ Eski model artık kullanılmıyor. """
+#     reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
+#     reporter_title = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
+#     date = models.DateField( verbose_name="Raporun ait olduğu tarih")
+
+#     def __str__(self):
+#         return str(self.date)
+
+class AcquisitionReport(models.Model):
+    """ Sağlama birimi modeli. """
     reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
-    reporter_title = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
-    date = models.DateField( verbose_name="Raporun ait olduğu tarih")
+    reporter_title    = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
+    posted_book       = models.IntegerField(default=0, verbose_name= "Kütüphaneden gönderilen kitap saıyısı.")
+    refactored_items  = models.IntegerField(default=0, verbose_name= "Yeniden düzenlenip envanteri yapılan yayın sayısı.")
+    date              = models.DateField( verbose_name="Raporun ait olduğu tarih")
+
 
     def __str__(self):
         return str(self.date)
@@ -19,9 +32,9 @@ class PubType(models.Model):
         return self.publication_type
 
 
-class SaglamaAnalytic(models.Model):
+class AcquisitionAnalytic(models.Model):
     pub_type = models.ForeignKey(PubType, on_delete=models.CASCADE, verbose_name="Yayın türü (Kitap, dergi, gazete)")
-    report = models.ForeignKey(SaglamaReport, on_delete=models.CASCADE, verbose_name="Sağlama raporu:")
+    report = models.ForeignKey(AcquisitionReport, on_delete=models.CASCADE, verbose_name="Sağlama raporu:")
    
 
     pub_arrived_as_supply = models.IntegerField(default=0, verbose_name="Derlemeden gelen yayın sayısı.")

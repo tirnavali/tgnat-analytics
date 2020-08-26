@@ -28,7 +28,7 @@ class SaglamaAnalyticForm(forms.Form):
 
 class SaglamaReportForm(forms.ModelForm):
     class Meta:
-        model = SaglamaReport
+        model = AcquisitionReport
         fields = '__all__'
    
         widgets = {
@@ -42,7 +42,7 @@ class SaglamaReportForm(forms.ModelForm):
 
 class SaglamaForm(forms.ModelForm):
     class Meta:
-        model = SaglamaAnalytic
+        model = AcquisitionAnalytic
         fields = '__all__'
    
         widgets = {
