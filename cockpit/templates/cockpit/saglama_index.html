@@ -12,6 +12,38 @@
 {% block content %}
 <h1>Sağlama index sayfası</h1>
 <a href="{% url 'saglama_yeni' %}">Ekle</a>
+
+{% for report in acquisition_report %}
+
+<table border="1">
+  <thead>
+    <th></th>
+    <th></th>
+    <th>No</th>
+    <th>Rapor Tarihi</th>
+    <th>Raporu Gönderen</th>
+    <th>Giden Kitap Sayısı</th>
+    <th>Düzeltmeleri yapılan yayın sayısı</th>
+
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sil</td>
+      <td><a href="#" >Düzenle </a></td>
+      
+      <td><a href="#" >No </a></td>
+      <td><a href="#" >{{ report.date }} </a></td>
+      <td>{{ report.reporter_identity }}</td>
+      <td>{{ report.posted_book }}</td>
+      <td>{{ report.refactored_items }}</td>
+    </tr>
+  </tbody>
+</table>>
+
+
+
+
+{% endfor %}
 {% endblock %}
 
 

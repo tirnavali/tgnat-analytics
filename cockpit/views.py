@@ -28,6 +28,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 def saglama_index(request):
     baslik = "Sağlama birimi analitikleri"
+    acquisition_report = AcquisitionReport.objects.all()
     return render(request, 'cockpit/saglama_index.html', locals())
 
 def saglama_new(request):
