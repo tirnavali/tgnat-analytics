@@ -13,7 +13,9 @@ from django.utils import timezone
 #         return str(self.date)
 
 class AcquisitionReport(models.Model):
-    """ Sağlama birimi modeli. """
+    """ 
+    @Related_with one_to_many  AcquisitionAnalytic \n
+    Sağlama birimi modeli. """
     reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
     reporter_title    = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
     posted_book       = models.IntegerField(default=0, verbose_name= "Kütüphaneden gönderilen kitap saıyısı.")
@@ -27,6 +29,9 @@ class AcquisitionReport(models.Model):
 
 
 class PubType(models.Model):
+    """ 
+    @Related_with one_to_many  AcquisitionAnalytic \n
+    Sağlama birimi modeline bağlı yayın türleri modeli. """
     publication_type = models.CharField(max_length=60, verbose_name="Yayın türü (Kitap, dergi, gazete)")
 
     def __str__(self):
@@ -34,6 +39,11 @@ class PubType(models.Model):
 
 
 class AcquisitionAnalytic(models.Model):
+    """ 
+    @Related_with many_to_one  AcquisitionReport \n
+    @Related_with many_to_one  PubType \n
+    Sağlama birimine ait olan çeşitli analitikleri içeren model.
+     """
     pub_type              = models.ForeignKey(PubType, on_delete=models.CASCADE, verbose_name="Yayın türü (Kitap, dergi, gazete)")
     report                = models.ForeignKey(AcquisitionReport, on_delete=models.CASCADE, verbose_name="Sağlama raporu:")
     pub_arrived_as_supply = models.IntegerField(default=0, verbose_name="Derlemeden gelen yayın sayısı.")
@@ -54,6 +64,9 @@ class AcquisitionAnalytic(models.Model):
 
 
 class ReferenceServiceAnalytic(models.Model):
+    """     
+    Danışma - referans birimine ait olan çeşitli analitikleri içeren model.
+     """
     user_from_out                  = models.IntegerField(default=0, verbose_name="Dışarıdan gelen kullanıcı sayısı.")
     user_from_inside               = models.IntegerField(default=0, verbose_name="İçeriden gelen kullanıcı sayısı.")
 
@@ -101,7 +114,11 @@ class ReferenceServiceAnalytic(models.Model):
     def __str__(self):
         return str(self.date) + " Tarihli Kayıt."
 
+
     def is_minus_value_entered(self):
+        """ 
+        returns Boolean\n
+        Tam sayı alanlarda negatif değer var ise False döner."""
         return (int(self.user_from_out)            < 0 or 
             int(self.user_from_inside)             < 0 or
             int(self.online_user_inside)           < 0 or
