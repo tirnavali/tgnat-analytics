@@ -24,7 +24,7 @@
           <a class="nav-link" href="#">Katalog</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'saglama_index' %}">Süreli Yayınlar</a>
+          <a class="nav-link" href="{% url 'acquisition_report_index' %}">Süreli Yayınlar</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -52,8 +52,8 @@
     </div>
   </nav>
   <h2 class="bg-secondary">{{modul_baslik}} 
-    <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{% url 'reference_chart' %}">Saçılım Grafiği</a>
-    <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{%  url 'reference_line_chart' %}">Çizgi Grafiği</a>
+    <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{{ graph_url}}">{{graph_name}}</a>
+    <a class="btn btn-sm btn-info mr-2 mb-2 mt-2" href="{{ graph_2_url}}">{{graph_2_name}}</a>
   </h2>
   <div class="container-fluid ">
   {% block content %}

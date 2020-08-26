@@ -11,7 +11,7 @@ urlpatterns = [
     path('referans/line_chart', views.reference_line_chart, name='reference_line_chart'),
     path('api/referans/', views.reference_api, name="reference-api"),
 
-    path('saglama/', views.saglama_index, name='saglama_index'),
+    path('saglama/', views.acquisition_report_index, name='acquisition_report_index'),
     path('saglama/yeni', views.saglama_new, name='saglama_yeni'),
     path('saglama/yeni-2', views.SaglamaAnalyticFormView.as_view(), name='saglama_yeni_2'),
 

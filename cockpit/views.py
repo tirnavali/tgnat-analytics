@@ -26,6 +26,12 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 ##########################################################################
 
+def acquisition_report_index(request):
+    baslik = "Sağlama birimi analitikleri"
+    modul_baslik = "Sağlama Rapor Listesi"
+    acquisition_report = AcquisitionReport.objects.all()
+    return render(request, 'cockpit/acquisition_report_index.html', locals())
+
 def saglama_index(request):
     baslik = "Sağlama birimi analitikleri"
     acquisition_report = AcquisitionReport.objects.all()
@@ -119,6 +125,10 @@ def index(request):
     data = serialize('json', ReferenceServiceAnalytic.objects.all())
     context = { 'latest_data_list'  : latest_data_list,
                 'modul_baslik'      :"Referans Hizmetleri Analitikleri",
+                'graph_url'         :'/referans/line_chart',
+                'graph_name'        :'Çizgi Grafiği',                
+                'graph_2_url'       :'/referans/chart',
+                'graph_2_name'      :'Dağılım Grafiği',
                 'data'              : data}
     return render(request, 'cockpit/index.html', context)
 

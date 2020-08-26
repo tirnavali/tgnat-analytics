@@ -1,0 +1,49 @@
+{% extends 'cockpit/base.html' %}
+{% load static %}
+{% block header %}
+<link
+      rel="stylesheet"
+      href="{% static 'cockpit/css/marketing_page.css' %}"
+    />
+
+{% endblock %}
+
+
+{% block content %}
+
+<a href="{% url 'saglama_yeni' %}">Ekle</a>
+
+{% for report in acquisition_report %}
+
+<table border="1">
+  <thead>
+    
+    <th>No</th>    
+    <th>Raporu Gönderen</th>
+    <th>Giden Kitap Sayısı</th>
+    <th>Düzeltmeleri yapılan yayın sayısı</th>
+    <th>Rapor Tarihi</th>
+    <th></th>
+    <th></th>
+
+  </thead>
+  <tbody>
+    <tr>    
+      <td><a href="#" >1 </a></td>      
+      <td>{{ report.reporter_identity }}</td>
+      <td>{{ report.posted_book }}</td>
+      <td>{{ report.refactored_items }}</td>
+      <td><a href="#" >{{ report.date }} </a></td>
+      <td><a href="#" >Sil </a></td>
+      <td><a href="#" >Düzenle </a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+{% endfor %}
+{% endblock %}
+
+
