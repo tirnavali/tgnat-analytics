@@ -17,7 +17,7 @@ from .models import *
 
 class SaglamaAnalyticForm(forms.Form):
 
-    pub_type              = forms.ModelChoiceField(queryset = PubType.objects, label='Yayın türü:', help_text='100 characters max.')
+    pub_type              = forms.ModelChoiceField(queryset = PubType.objects, label='Yayın türü:')
     #report                = forms.IntegerField(disabled = True)
     pub_arrived_as_supply = forms.IntegerField(label='Derlemeden gelen yayın sayısı:')
     pub_arrived_as_gift   = forms.IntegerField(label='Hediye gelen yayın sayısı:')
@@ -28,7 +28,7 @@ class SaglamaAnalyticForm(forms.Form):
 
 class SaglamaReportForm(forms.ModelForm):
     class Meta:
-        model = SaglamaReport
+        model = AcquisitionReport
         fields = '__all__'
    
         widgets = {
@@ -42,7 +42,7 @@ class SaglamaReportForm(forms.ModelForm):
 
 class SaglamaForm(forms.ModelForm):
     class Meta:
-        model = SaglamaAnalytic
+        model = AcquisitionAnalytic
         fields = '__all__'
    
         widgets = {

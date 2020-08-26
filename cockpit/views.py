@@ -28,6 +28,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 def saglama_index(request):
     baslik = "Sağlama birimi analitikleri"
+    acquisition_report = AcquisitionReport.objects.all()
     return render(request, 'cockpit/saglama_index.html', locals())
 
 def saglama_new(request):
@@ -85,7 +86,7 @@ class SaglamaAnalyticFormView(View):
     def get(self, request):
         
         saglama_report_pk = request.session["saglama_report_pk"]
-        saglama_report = SaglamaReport.objects.get(id=saglama_report_pk)
+        saglama_report = AcquisitionReport.objects.get(id=saglama_report_pk)
         print(saglama_report)
         form = self.form
         form = SaglamaForm(initial={ 'report' : saglama_report_pk })

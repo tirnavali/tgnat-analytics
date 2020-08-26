@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import ReferenceServiceAnalytic, PubType, SaglamaAnalytic, SaglamaReport
+from .models import *
 # Register your models here.
 admin.site.register(ReferenceServiceAnalytic)
 admin.site.register(PubType)
-admin.site.register(SaglamaAnalytic)
-admin.site.register(SaglamaReport)
+admin.site.register(AcquisitionAnalytic)
+admin.site.register(AcquisitionReport)
 
 
