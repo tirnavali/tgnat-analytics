@@ -26,7 +26,7 @@ class SaglamaAnalyticForm(forms.Form):
     pub_saved_as_supply   = forms.IntegerField(label='Derlemeden koleksiyona alınan yayın sayısı:')
     pub_saved_as_gift     = forms.IntegerField(label='Hediyelerden koleksiyona alınan yayın sayısı:')
     pub_saved_as_old      = forms.IntegerField(label='Eski etiketiyle koleksiyona alınan yayın sayısı:')
-    report_date           = forms.DateField(initial = timezone.now())
+    #report_date           = forms.DateField(initial = timezone.now())
 
 class SaglamaReportForm(forms.ModelForm):
     class Meta:

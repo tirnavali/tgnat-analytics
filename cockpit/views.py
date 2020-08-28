@@ -37,9 +37,9 @@ def new_acquisition_report(request):
 
     if request.method == 'GET':
         form = SaglamaReportForm()
-        form_2 = SaglamaAnalyticForm(initial = {'pub_type' : 1})
-        # form_3 = SaglamaAnalyticForm(initial = {'pub_type' : 2})
-        # form_4 = SaglamaAnalyticForm(initial = {'pub_type' : 3})
+        form_2 = SaglamaAnalyticForm(initial = {'pub_type' : 1}, prefix = "sub_1")
+        form_3 = SaglamaAnalyticForm(initial = {'pub_type' : 2})
+        form_4 = SaglamaAnalyticForm(initial = {'pub_type' : 3})
         return render(request, 'cockpit/saglama_report_yeni.html', locals())
     elif request.method == 'POST':
         query_dict = QueryDict() #posttan gelen veriyi aktarıp forma yazalım yada doğrudan objeye yaz daha iyi
@@ -64,6 +64,9 @@ def new_acquisition_report(request):
         acquisition_report.save()
         
         ''' Analitik modeli '''
+        saglama_analiytic_1 = SaglamaAnalyticForm(request.POST, prefix="sub_1")
+        #saglama_analiytic_1.report = AcquisitionReport.objects.get(pk=report)
+        saglama_analiytic_1.save()
         pub_type               = request.POST.get('pub_type')
         report                 = acquisition_report.id
         pub_arrived_as_supply  = request.POST.get('pub_arrived_as_supply')
@@ -83,9 +86,11 @@ def new_acquisition_report(request):
         acquisition_analytic.pub_saved_as_gift     = pub_saved_as_gift
         acquisition_analytic.pub_saved_as_old      = pub_saved_as_old
         acquisition_analytic.report_date           = report_date
-
-        acquisition_analytic.save()
-
+        
+        try:
+            acquisition_analytic.save()
+        except:
+            return HttpResponse("Kayıt oluşturulamadı.")
        
 
         

@@ -22,9 +22,7 @@ class AcquisitionReport(models.Model):
     refactored_items  = models.IntegerField(default=0, verbose_name= "Yeniden düzenlenip envanteri yapılan yayın sayısı.")
     notes             = models.TextField(max_length=1500, blank=True, verbose_name="Ekstra not alanı.")
     date              = models.DateField( verbose_name="Raporun ait olduğu tarih")
-    created_at        = models.DateField(auto_now = True, verbose_name= "Kayıdın oluşturulduğu tarih.")
-
-
+    created_at        = models.DateField(verbose_name="Raporun hazırlandığı tarih (Otomatik oluşturulur.)", default=timezone.now)
     def __str__(self):
         return str(self.date)
 
@@ -59,7 +57,7 @@ class AcquisitionAnalytic(models.Model):
     #date                 = models.DateField( verbose_name="Raporun ait olduğu tarih")
 
     def __str__(self):
-        return str(self.date) + " Tarihli rapor"
+        return str(self.pub_type) + " Tarihli rapor"
 
 
 
