@@ -3,11 +3,11 @@ from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, QueryDict
 from django.views import View
 from django.views.generic import DetailView, ListView
 from django.db.models import Sum
-from .models import ReferenceServiceAnalytic
+from .models import *
 #from rest_framework import viewsets
 #from .serializers import UserSerializer, GroupSerializer
 from django.contrib.auth.models import User, Group
@@ -31,6 +31,89 @@ def acquisition_report_index(request):
     modul_baslik = "Sağlama Rapor Listesi"
     acquisition_report = AcquisitionReport.objects.all()
     return render(request, 'cockpit/acquisition_report_index.html', locals())
+
+def new_acquisition_report(request):
+    baslik = 'Sağlama raporu ekleme formu'
+
+    if request.method == 'GET':
+        form = SaglamaReportForm()
+        form_2 = SaglamaAnalyticForm(initial = {'pub_type' : 1})
+        # form_3 = SaglamaAnalyticForm(initial = {'pub_type' : 2})
+        # form_4 = SaglamaAnalyticForm(initial = {'pub_type' : 3})
+        return render(request, 'cockpit/saglama_report_yeni.html', locals())
+    elif request.method == 'POST':
+        query_dict = QueryDict() #posttan gelen veriyi aktarıp forma yazalım yada doğrudan objeye yaz daha iyi
+        print(request.POST)
+        acquisition_report = AcquisitionReport() # Modelimizi oluşturalım
+        acquisition_analytic = AcquisitionAnalytic()
+
+        ''' Rapor modeli '''
+        reporter_title    = request.POST.get('reporter_title')
+        reporter_identity = request.POST.get('reporter_identity')
+        date              = request.POST.get('date')
+        notes             = request.POST.get('notes')
+        posted_book       = request.POST.get('posted_book')
+        refactored_items  = request.POST.get('refactored_items')
+
+        acquisition_report.reporter_identity = reporter_identity
+        acquisition_report.reporter_title = reporter_title
+        acquisition_report.posted_book = posted_book
+        acquisition_report.refactored_items = refactored_items
+        acquisition_report.notes = notes
+        acquisition_report.date = date
+        acquisition_report.save()
+        
+        ''' Analitik modeli '''
+        pub_type               = request.POST.get('pub_type')
+        report                 = acquisition_report.id
+        pub_arrived_as_supply  = request.POST.get('pub_arrived_as_supply')
+        pub_arrived_as_gift    = request.POST.get('pub_arrived_as_gift')
+        pub_bought             = request.POST.get('pub_bought')
+        pub_saved_as_supply    = request.POST.get('pub_saved_as_supply')
+        pub_saved_as_gift      = request.POST.get('pub_saved_as_gift')
+        pub_saved_as_old       = request.POST.get('pub_saved_as_old')
+        report_date            = request.POST.get('report_date')
+
+        acquisition_analytic.pub_type = PubType.objects.get(pk=pub_type)
+        acquisition_analytic.report = AcquisitionReport.objects.get(pk=report)
+        acquisition_analytic.pub_arrived_as_supply = pub_arrived_as_supply
+        acquisition_analytic.pub_arrived_as_gift   = pub_arrived_as_gift
+        acquisition_analytic.pub_bought            = pub_bought
+        acquisition_analytic.pub_saved_as_supply   = pub_saved_as_supply
+        acquisition_analytic.pub_saved_as_gift     = pub_saved_as_gift
+        acquisition_analytic.pub_saved_as_old      = pub_saved_as_old
+        acquisition_analytic.report_date           = report_date
+
+        acquisition_analytic.save()
+
+       
+
+        
+
+        
+        
+        
+        
+        print("Rapor id is : {}\n Analytic id is: {}\n".format(str(acquisition_report.id), 
+        str(acquisition_analytic.id)))
+        
+            
+        return redirect('acquisition_report_index')
+
+        # form = SaglamaReportForm(QueryDict.add('reporter_title', reporter_title ))
+        # form['reporter_title']
+        # print(form)
+        # # form_2 = SaglamaAnalyticForm(initial = {'pub_type' : 1})
+        # # form_3 = SaglamaAnalyticForm(initial = {'pub_type' : 2})
+        # # form_4 = SaglamaAnalyticForm(initial = {'pub_type' : 3})
+        # if form.is_valid():
+        #     acquisition_report = form.save()
+        #     print(acquisition_report)
+        #     print('*'*10)
+        #     return redirect('acquisition_report_index')
+        # else :
+        #     return HttpResponse("views.py dosyasında - new_acquisition_report - methodunda bri hata oluştu.")
+
 
 def saglama_index(request):
     baslik = "Sağlama birimi analitikleri"

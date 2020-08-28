@@ -11,9 +11,9 @@
 
 {% block content %}
 
-<a href="{% url 'saglama_yeni' %}">Ekle</a>
+<a href="{% url 'new_acquisition_report' %}">Ekle</a>
 
-{% for report in acquisition_report %}
+
 
 <table border="1">
   <thead>
@@ -28,6 +28,7 @@
 
   </thead>
   <tbody>
+    {% for report in acquisition_report %}
     <tr>    
       <td><a href="#" >1 </a></td>      
       <td>{{ report.reporter_identity }}</td>
@@ -37,13 +38,14 @@
       <td><a href="#" >Sil </a></td>
       <td><a href="#" >Düzenle </a></td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 
 
 
 
-{% endfor %}
+
 {% endblock %}
 
 
