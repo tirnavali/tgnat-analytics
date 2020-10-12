@@ -20,12 +20,12 @@ class SaglamaAnalyticForm(forms.Form):
 
     pub_type              = forms.ModelChoiceField(queryset = PubType.objects, label='Yayın türü:')
     #report                = forms.IntegerField(disabled = True)
-    pub_arrived_as_supply = forms.IntegerField(label='Derlemeden gelen yayın sayısı:')
-    pub_arrived_as_gift   = forms.IntegerField(label='Hediye gelen yayın sayısı:')
-    pub_bought            = forms.IntegerField(label='Satın alınan yayın sayısı:')
-    pub_saved_as_supply   = forms.IntegerField(label='Derlemeden koleksiyona alınan yayın sayısı:')
-    pub_saved_as_gift     = forms.IntegerField(label='Hediyelerden koleksiyona alınan yayın sayısı:')
-    pub_saved_as_old      = forms.IntegerField(label='Eski etiketiyle koleksiyona alınan yayın sayısı:')
+    pub_arrived_as_supply = forms.IntegerField(initial = 0, label='Derlemeden gelen yayın sayısı:', max_value=100000, min_value=0)
+    pub_arrived_as_gift   = forms.IntegerField(initial = 0, label='Hediye gelen yayın sayısı:' , max_value=100000, min_value=0)
+    pub_bought            = forms.IntegerField(initial = 0, label='Satın alınan yayın sayısı:' , max_value=100000, min_value=0)
+    pub_saved_as_supply   = forms.IntegerField(initial = 0, label='Derlemeden koleksiyona alınan yayın sayısı:' , max_value=100000, min_value=0)
+    pub_saved_as_gift     = forms.IntegerField(initial = 0, label='Hediyelerden koleksiyona alınan yayın sayısı:'  , max_value=100000, min_value=0)
+    pub_saved_as_old      = forms.IntegerField(initial = 0, label='Eski etiketiyle koleksiyona alınan yayın sayısı:'  , max_value=100000, min_value=0)
     #report_date           = forms.DateField(initial = timezone.now())
 
 class SaglamaReportForm(forms.ModelForm):
