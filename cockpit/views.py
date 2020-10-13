@@ -77,75 +77,18 @@ def new_acquisition_report(request):
             acquisition_report.save()
             
         except:
-            return HttpResponse("Kayıt oluşturulamadı. 2  " + acquisition_report.__str__())
-        
-        form_1.save_form(acquisition_report.id)
-        form_2.save_form(acquisition_report.id)
-        form_3.save_form(acquisition_report.id)
-        return redirect('acquisition_report_index')
-        
-        ''' Analitik modeli '''
-        #print("###### " + str(request.POST))
-        #saglama_analiytic_1 = SaglamaAnalyticForm(request.POST, prefix="sub_1")
-        #saglama_analiytic_1.report = AcquisitionReport.objects.get(pk=report)
-        #print(saglama_analiytic_1) 
-        #saglama_analiytic_1.save()
-"""         report = AcquisitionReport.objects.get(pk=acquisition_report.id)
+            return HttpResponse("Hata - acquisition_report.save() ")
 
-        pub_type               = request.POST.get('sub_1-pub_type')        
-        pub_arrived_as_supply  = request.POST.get('sub_1-pub_arrived_as_supply')
-        pub_arrived_as_gift    = request.POST.get('sub_1-pub_arrived_as_gift')
-        pub_bought             = request.POST.get('sub_1-pub_bought')
-        pub_saved_as_supply    = request.POST.get('sub_1-pub_saved_as_supply')
-        pub_saved_as_gift      = request.POST.get('sub_1-pub_saved_as_gift')
-        pub_saved_as_old       = request.POST.get('sub_1-pub_saved_as_old')
-        report_date            = request.POST.get('sub_1-report_date')
-
-        acquisition_analytic_sub_1.pub_type              = PubType.objects.get(pk=pub_type)
-        acquisition_analytic_sub_1.report                = report
-        acquisition_analytic_sub_1.pub_arrived_as_supply = pub_arrived_as_supply
-        acquisition_analytic_sub_1.pub_arrived_as_gift   = pub_arrived_as_gift
-        acquisition_analytic_sub_1.pub_bought            = pub_bought
-        acquisition_analytic_sub_1.pub_saved_as_supply   = pub_saved_as_supply
-        acquisition_analytic_sub_1.pub_saved_as_gift     = pub_saved_as_gift
-        acquisition_analytic_sub_1.pub_saved_as_old      = pub_saved_as_old
-        acquisition_analytic_sub_1.report_date           = report_date
-
-        acquisition_analytic_sub_2.pub_type              = PubType.objects.get(pk=request.POST.get('sub_2-pub_type'))
-        acquisition_analytic_sub_2.report                = report
-        acquisition_analytic_sub_2.pub_arrived_as_supply = request.POST.get('sub_2-pub_arrived_as_supply')
-        acquisition_analytic_sub_2.pub_arrived_as_gift   = request.POST.get('sub_2-pub_arrived_as_gift')
-        acquisition_analytic_sub_2.pub_bought            = request.POST.get('sub_2-pub_bought')
-        acquisition_analytic_sub_2.pub_saved_as_supply   = request.POST.get('sub_2-pub_saved_as_supply')
-        acquisition_analytic_sub_2.pub_saved_as_gift     = request.POST.get('sub_2-pub_saved_as_gift')
-        acquisition_analytic_sub_2.pub_saved_as_old      = request.POST.get('sub_2-pub_saved_as_old')
-        acquisition_analytic_sub_2.report_date           = request.POST.get('sub_2-report_date')
-        
-        acquisition_analytic_sub_3.pub_type              = PubType.objects.get(pk=request.POST.get('sub_3-pub_type'))
-        acquisition_analytic_sub_3.report                = report
-        acquisition_analytic_sub_3.pub_arrived_as_supply = request.POST.get('sub_3-pub_arrived_as_supply')
-        acquisition_analytic_sub_3.pub_arrived_as_gift   = request.POST.get('sub_3-pub_arrived_as_gift')
-        acquisition_analytic_sub_3.pub_bought            = request.POST.get('sub_3-pub_bought')
-        acquisition_analytic_sub_3.pub_saved_as_supply   = request.POST.get('sub_3-pub_saved_as_supply')
-        acquisition_analytic_sub_3.pub_saved_as_gift     = request.POST.get('sub_3-pub_saved_as_gift')
-        acquisition_analytic_sub_3.pub_saved_as_old      = request.POST.get('sub_3-pub_saved_as_old')
-        acquisition_analytic_sub_3.report_date           = request.POST.get('sub_3-report_date') 
-        
         try:
-            acquisition_analytic_sub_1.save()
-            acquisition_analytic_sub_2.save()
-            acquisition_analytic_sub_3.save()
+            form_1.save_form(acquisition_report.id)
+            form_2.save_form(acquisition_report.id)
+            form_3.save_form(acquisition_report.id)
         except OverflowError:
             return HttpResponse("Python int too large to convert to SQLite INTEGER") 
-
- 
-         print("Rapor id is : {}\nAnalytics id's are: {},{},{}\n".format(str(acquisition_report.id), 
-        str(acquisition_analytic_sub_1.id),
-        str(acquisition_analytic_sub_2.id),
-        str(acquisition_analytic_sub_3.id))) """
         
-            
         
+        return redirect('acquisition_report_index')
+      
 
 
 def saglama_index(request):
