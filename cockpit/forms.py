@@ -26,6 +26,39 @@ class SaglamaAnalyticForm(forms.Form):
     pub_saved_as_supply   = forms.IntegerField(initial = 0, label='Derlemeden koleksiyona alınan yayın sayısı:' , max_value=100000, min_value=0)
     pub_saved_as_gift     = forms.IntegerField(initial = 0, label='Hediyelerden koleksiyona alınan yayın sayısı:'  , max_value=100000, min_value=0)
     pub_saved_as_old      = forms.IntegerField(initial = 0, label='Eski etiketiyle koleksiyona alınan yayın sayısı:'  , max_value=100000, min_value=0)
+
+
+    def save_form(self, report_id):
+        ''' Saves form data to model'''
+        acquisition_analytic = AcquisitionAnalytic()
+
+        print("Baskı alınıyor : \t" + str(self.fields.values()))
+        print("Baskı alınıyor : \t" + str(self.fields['pub_type']))
+        print("Baskı alınıyor : \t" + str(self.fields['pub_arrived_as_supply']))
+
+        if self.is_valid():
+            # is_valid çağırıldıktan sonra cleaned_data sözlüğünden verileri alabiliriz.
+            print("Her şey yolunda baskıya hazırım ######### \n \n")
+            print("CLeaned data : " + str(self.cleaned_data))
+
+
+            acquisition_analytic.pub_type = self.cleaned_data["pub_type"]
+            acquisition_analytic.report                = AcquisitionReport.objects.get(pk = int(report_id))
+            acquisition_analytic.pub_arrived_as_supply = self.cleaned_data['pub_arrived_as_supply']
+            acquisition_analytic.pub_arrived_as_gift   = self.cleaned_data['pub_arrived_as_gift']
+            acquisition_analytic.pub_bought            = self.cleaned_data['pub_bought']
+            acquisition_analytic.pub_saved_as_supply   = self.cleaned_data['pub_saved_as_supply']
+            acquisition_analytic.pub_saved_as_gift     = self.cleaned_data['pub_saved_as_gift']
+            acquisition_analytic.pub_saved_as_old      = self.cleaned_data['pub_saved_as_old']
+
+            acquisition_analytic.save()
+        else:
+            return self.errors
+        
+
+        
+
+
     #report_date           = forms.DateField(initial = timezone.now())
 
 class SaglamaReportForm(forms.ModelForm):

@@ -50,12 +50,14 @@ def new_acquisition_report(request):
     elif request.method == 'POST':
         query_dict = QueryDict() #posttan gelen veriyi aktarıp forma yazalım yada doğrudan objeye yaz daha iyi
         print("## post basılıyor ## \n\n"+str(request.POST)+"\n\n")
-        form_1 = SaglamaAnalyticForm(request.POST, prefix="sub_3")
+        form_1 = SaglamaAnalyticForm(request.POST, prefix="sub_1")
+        form_2 = SaglamaAnalyticForm(request.POST, prefix="sub_2")
+        form_3 = SaglamaAnalyticForm(request.POST, prefix="sub_3")
         print("## form_1 basılıyor ## \n\n"+str(form_1)+"\n\n")
         acquisition_report = AcquisitionReport() # Modelimizi oluşturalım
-        acquisition_analytic_sub_1 = AcquisitionAnalytic()
+        """ acquisition_analytic_sub_1 = AcquisitionAnalytic()
         acquisition_analytic_sub_2 = AcquisitionAnalytic()
-        acquisition_analytic_sub_3 = AcquisitionAnalytic()
+        acquisition_analytic_sub_3 = AcquisitionAnalytic() """
 
         ''' Rapor modeli '''
         reporter_title    = request.POST.get('reporter_title')
@@ -73,16 +75,22 @@ def new_acquisition_report(request):
         acquisition_report.date = date
         try:
             acquisition_report.save()
+            
         except:
-            return HttpResponse("Kayıt oluşturulamadı. 2" + acquisition_report.__str__())
-                
+            return HttpResponse("Kayıt oluşturulamadı. 2  " + acquisition_report.__str__())
+        
+        form_1.save_form(acquisition_report.id)
+        form_2.save_form(acquisition_report.id)
+        form_3.save_form(acquisition_report.id)
+        return redirect('acquisition_report_index')
+        
         ''' Analitik modeli '''
         #print("###### " + str(request.POST))
         #saglama_analiytic_1 = SaglamaAnalyticForm(request.POST, prefix="sub_1")
         #saglama_analiytic_1.report = AcquisitionReport.objects.get(pk=report)
         #print(saglama_analiytic_1) 
         #saglama_analiytic_1.save()
-        report = AcquisitionReport.objects.get(pk=acquisition_report.id)
+"""         report = AcquisitionReport.objects.get(pk=acquisition_report.id)
 
         pub_type               = request.POST.get('sub_1-pub_type')        
         pub_arrived_as_supply  = request.POST.get('sub_1-pub_arrived_as_supply')
@@ -121,24 +129,23 @@ def new_acquisition_report(request):
         acquisition_analytic_sub_3.pub_saved_as_supply   = request.POST.get('sub_3-pub_saved_as_supply')
         acquisition_analytic_sub_3.pub_saved_as_gift     = request.POST.get('sub_3-pub_saved_as_gift')
         acquisition_analytic_sub_3.pub_saved_as_old      = request.POST.get('sub_3-pub_saved_as_old')
-        acquisition_analytic_sub_3.report_date           = request.POST.get('sub_3-report_date')
+        acquisition_analytic_sub_3.report_date           = request.POST.get('sub_3-report_date') 
         
         try:
-
             acquisition_analytic_sub_1.save()
             acquisition_analytic_sub_2.save()
             acquisition_analytic_sub_3.save()
         except OverflowError:
-            return HttpResponse("Python int too large to convert to SQLite INTEGER")
+            return HttpResponse("Python int too large to convert to SQLite INTEGER") 
 
  
-        print("Rapor id is : {}\nAnalytics id's are: {},{},{}\n".format(str(acquisition_report.id), 
+         print("Rapor id is : {}\nAnalytics id's are: {},{},{}\n".format(str(acquisition_report.id), 
         str(acquisition_analytic_sub_1.id),
         str(acquisition_analytic_sub_2.id),
-        str(acquisition_analytic_sub_3.id)))
+        str(acquisition_analytic_sub_3.id))) """
         
             
-        return redirect('acquisition_report_index')
+        
 
 
 def saglama_index(request):
