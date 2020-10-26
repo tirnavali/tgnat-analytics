@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<a href="{% url 'new_acquisition_report' %}">Ekle</a>
+<a href="{% url 'acquisition_report_new' %}">Ekle</a>
 
 
 
@@ -34,9 +34,9 @@
       <td>{{ report.reporter_identity }}</td>
       <td>{{ report.posted_book }}</td>
       <td>{{ report.refactored_items }}</td>
-      <td><a href="#" >{{ report.date }} </a></td>
-      <td><a href="#" >Sil </a></td>
-      <td><a href="#" >Düzenle </a></td>
+      <td><a href="{% url 'acquisition_report_detail' report.id %}" >{{ report.date }} </a></td>
+      <td><a href="{% url 'acquisition_report_delete' report.id %}" >Sil </a></td>
+      <td><a href="{% url 'acquisition_report_edit' report.id %}" >Düzenle </a></td>
     </tr>
     {% endfor %}
   </tbody>

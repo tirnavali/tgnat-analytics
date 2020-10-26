@@ -25,6 +25,30 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer """
 
 ##########################################################################
+def acquisition_report_delete(request, pk):
+    return HttpResponse("Silincek id no {}".format(pk))
+
+def acquisition_report_edit(request, pk):
+    return HttpResponse("Edit page")
+
+def acquisition_report_detail(request, pk):
+    book  = AcquisitionAnalytic()
+    newspaper  = AcquisitionAnalytic()
+    journal = AcquisitionAnalytic()
+    acquisition_report = AcquisitionReport.objects.get(pk=pk)
+    acquisition_analytics = AcquisitionAnalytic.objects.filter(report_id = acquisition_report.pk)
+    for analytic in acquisition_analytics:
+        print(analytic.pub_type)
+        if analytic.pub_type.publication_type == "Kitap":
+            book = analytic
+        elif analytic.pub_type.publication_type == "Dergi":
+            journal = analytic
+        else:
+            newspaper = analytic
+    
+    return render(request, 'cockpit/acquisition_report_detail.html', locals())
+    
+    
 
 def acquisition_report_index(request):
     """ 
@@ -35,7 +59,7 @@ def acquisition_report_index(request):
     acquisition_report = AcquisitionReport.objects.all()
     return render(request, 'cockpit/acquisition_report_index.html', locals())
 
-def new_acquisition_report(request):
+def acquisition_report_new(request):
     """ 
     Yeni AcquisitonReport ve AcquisitionAnalytic modeli formu.
     """

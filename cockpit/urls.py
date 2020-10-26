@@ -12,7 +12,8 @@ urlpatterns = [
     path('api/referans/', views.reference_api, name="reference-api"),
 
     path('saglama/', views.acquisition_report_index, name='acquisition_report_index'),
-    path('saglama/yeni', views.new_acquisition_report, name='new_acquisition_report'),
-    path('saglama/yeni-2', views.SaglamaAnalyticFormView.as_view(), name='saglama_yeni_2'),
-
+    path('saglama/yeni', views.acquisition_report_new, name='acquisition_report_new'),
+    path('saglama/<int:pk>/', views.acquisition_report_detail, name='acquisition_report_detail'),
+    path('saglama/<int:pk>/duzenle', views.acquisition_report_edit, name='acquisition_report_edit'),
+    path('saglama/<int:pk>/sil', views.acquisition_report_delete, name='acquisition_report_delete'),
 ]
