@@ -7,7 +7,7 @@
 {% block content %}
 {{ acquisition_report.reporter_title }}
 {{ acquisition_analytics }}
-{{ book }}
+
 
 
 <div class="container">
@@ -26,8 +26,8 @@
   
           </thead>
           <tbody>
-            <tr class=""><th colspan="5" class="bg-warning">Tanımlayıcı bilgiler</th></tr>
-            <tr>
+            <tr class=""><th colspan="6" class="bg-warning">Tanımlayıcı bilgiler</th></tr>
+            <!-- <tr>
               <td class="" scope="row">Raporu hazırlayan kişi </td>
               <td class="text-right">
                 {{acquisition_report.reporter_title}}
@@ -35,66 +35,85 @@
               <td class="text-right"></td>
               <td class="text-right">%</td>
               <td>zz</td>            
+            </tr> -->
+            <tr>
+              <td>Kütüphaneden gönderilen kitap sayısı</td>
+              <td>2342</td>
+              <td  class="text-right">1231231</td>
+              <td  class="text-right">%45</td>
+              <td  class="text-right">1293190</td>
             </tr>
-  
-           
-  
-            <tr><th colspan="4" class="bg-warning">Tahsilat (TL)</th></tr>
-            
-           
-  
+            <tr>
+              <td>Yeniden düzenlenip envanteri yapılan yayın sayısı</td>
+              <td>3100</td>
+              <td  class="text-right">34222</td>
+              <td  class="text-right">%22</td>
+              <td  class="text-right">12000</td>
+            </tr>
           </tbody>
         </table>
-        <table>
+        <table class="table table-sm striped">
+          <tr><th colspan="6" class="bg-warning">Yayın türüne göre veriler</th></tr>
             <thead>
-                <th></th>
-                <th>{{journal.pub_type}}</th>
-
-                <th>Gazete</th>
-                <th>Kitap</th>
+                <th class="text-right"></th>
+                {% if journal.pub_type %}
+                <th class="text-right" >{{journal.pub_type}}</th>
+                {% else %}
+                <th >-</th>
+                {% endif %}
+                {% if newspaper.pub_type %}
+                <th class="text-right">{{newspaper.pub_type}}</th>
+                {% else %}
+                <th>-</th>
+                {% endif %}
+                {% if book.pub_type %}
+                <th class="text-right">{{book.pub_type}}</th>
+                {% else %}
+                <th>-</th>
+                {% endif %}               
 
             </thead>
             <tbody>
                 <tr>
                     <td>Derlemeden gelen yayın</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-right">{{journal.pub_arrived_as_supply}}</td>
+                    <td class="text-right">{{newspaper.pub_arrived_as_supply}}</td>
+                    <td class="text-right">{{book.pub_arrived_as_supply}}</td>
 
                 </tr>
                 <tr>
                     <td>Hediye gelen yayın</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-right">{{journal.pub_arrived_as_gift}}</td>
+                    <td class="text-right">{{newspaper.pub_arrived_as_gift}}</td>
+                    <td class="text-right">{{book.pub_arrived_as_gift}}</td>
 
                 </tr>
                 <tr>
                     <td>Satın alınan yayın</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-right">{{journal.pub_bought}}</td>
+                    <td class="text-right">{{newspaper.pub_bought}}</td>
+                    <td class="text-right">{{book.pub_bought}}</td>
 
                 </tr>
                 <tr>
                     <td>Derlemeden koleksiyona...</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-right">{{journal.pub_saved_as_supply}}</td>
+                    <td class="text-right">{{newspaper.pub_saved_as_supply}}</td>
+                    <td class="text-right">{{book.pub_saved_as_supply}}</td>
 
                 </tr>
                 <tr>
                     <td>Hediyeden koleksiyona...</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-right">{{journal.pub_saved_as_gift}}</td>
+                    <td class="text-right">{{newspaper.pub_saved_as_gift}}</td>
+                    <td class="text-right">{{book.pub_saved_as_gift}}</td>
 
                 </tr>
                 <tr>
                     <td>Eski etiketiyle koleksiyona...</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="text-right">{{journal.pub_saved_as_old}}</td>
+                    <td class="text-right">{{newspaper.pub_saved_as_old}}</td>
+                    <td class="text-right">{{book.pub_saved_as_old}}</td>
 
                 </tr>
             </tbody>
@@ -103,10 +122,10 @@
           <div class="row justify-content-between">
             
             <div class="col-sm">
-              <a class="btn btn-info btn-sm" href="{% url 'acquisition_report_index' %}">Listeye Dön</a>
+              <a class="d-print-none btn btn-info btn-sm" href="{% url 'acquisition_report_index' %}">Listeye Dön</a>
             </div>
             {%  if user.is_authenticated %}
-            <div class="col-sm">
+            <div class=" d-print-none col-sm">
               <a class="btn btn-warning btn-sm float-right ml-2" href="#">Düzenle</a>
               <a class="btn btn-danger btn-sm float-right" href="#">Sil</a>
             </div>
@@ -115,6 +134,13 @@
      
   
           </div>
+        </div>
+        <p>Notlar : {{ acquisition_report.notes}}</p>
+        <div>
+          <p  class="text-right mr-2 mb-0">Belgeyi oluşturan</p>
+          <p class="text-right mr-2 mt-0 mb-0">{{ acquisition_report.reporter_identity}}</p>
+          <p  class="text-right mr-2 mb-0">{{ acquisition_report.reporter_title}}</p>
+          <p  class="text-right mr-2">{{ acquisition_report.created_at}}</p>
         </div>
       </div>
     </div>

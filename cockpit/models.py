@@ -18,7 +18,7 @@ class AcquisitionReport(models.Model):
     Sağlama birimi modeli. """
     reporter_identity = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel adı soyadı.")
     reporter_title    = models.CharField(max_length=60, blank=True, verbose_name="Raporu hazırlayan personel ünvanı.")
-    posted_book       = models.IntegerField(default=0, verbose_name= "Kütüphaneden gönderilen kitap saıyısı.")
+    posted_book       = models.IntegerField(default=0, verbose_name= "Kütüphaneden gönderilen kitap sayısı.")
     refactored_items  = models.IntegerField(default=0, verbose_name= "Yeniden düzenlenip envanteri yapılan yayın sayısı.")
     notes             = models.TextField(max_length=1500, blank=True, verbose_name="Ekstra not alanı.")
     date              = models.DateField( verbose_name="Raporun ait olduğu tarih")

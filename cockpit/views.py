@@ -37,6 +37,8 @@ def acquisition_report_detail(request, pk):
     journal = AcquisitionAnalytic()
     acquisition_report = AcquisitionReport.objects.get(pk=pk)
     acquisition_analytics = AcquisitionAnalytic.objects.filter(report_id = acquisition_report.pk)
+    #QuerySet olarak dönen listedeki Modelleri tektek alalım.
+    #Ve html gösteriminde kullanmak üzere sıraya koyalım
     for analytic in acquisition_analytics:
         print(analytic.pub_type)
         if analytic.pub_type.publication_type == "Kitap":
