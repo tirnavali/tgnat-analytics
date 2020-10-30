@@ -29,7 +29,8 @@ class GroupViewSet(viewsets.ModelViewSet):
 def acquisition_report_destroy(request, pk):
     if request.method == 'POST':
         acq_report = AcquisitionReport.objects.get(pk = pk)
-        return HttpResponse("Sildim.")
+        acq_report.delete()
+        return redirect('acquisition_report_index')
     else:
         acquisition_report = AcquisitionReport.objects.get(pk = pk)
         pk = pk
