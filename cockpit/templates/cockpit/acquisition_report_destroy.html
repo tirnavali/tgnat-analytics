@@ -1,0 +1,21 @@
+{% extends 'cockpit/base.html' %}
+{% load static %}
+{% block header %}
+{% endblock %}
+
+
+{% block content %}
+<p>Aşağıdaki bilgiler silinecek! Emin misiniz?</p>
+<ul>
+    <li>
+        {{ acquisition_report }}
+    </li>
+    
+</ul>
+<form action="{% url 'acquisition_report_destroy' pk %}" method="POST">
+    {% csrf_token %}
+    <button>Sil</button>
+    <a href="{% url 'acquisition_report_detail' pk %}">Vazgeç</a>
+</form>
+
+{% endblock %}

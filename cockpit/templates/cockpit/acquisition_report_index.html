@@ -35,7 +35,7 @@
       <td>{{ report.posted_book }}</td>
       <td>{{ report.refactored_items }}</td>
       <td><a href="{% url 'acquisition_report_detail' report.id %}" >{{ report.date }} </a></td>
-      <td><a href="{% url 'acquisition_report_delete' report.id %}" >Sil </a></td>
+      <td><a href="{% url 'acquisition_report_destroy' report.pk %}" >Sil </a></td>
       <td><a href="{% url 'acquisition_report_edit' report.id %}" >Düzenle </a></td>
     </tr>
     {% endfor %}

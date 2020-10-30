@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -25,30 +26,42 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer """
 
 ##########################################################################
-def acquisition_report_delete(request, pk):
-    return HttpResponse("Silincek id no {}".format(pk))
+def acquisition_report_destroy(request, pk):
+    if request.method == 'POST':
+        acq_report = AcquisitionReport.objects.get(pk = pk)
+        return HttpResponse("Sildim.")
+    else:
+        acquisition_report = AcquisitionReport.objects.get(pk = pk)
+        pk = pk
+        #return HttpResponse("It's ok")
+        return render(request, 'cockpit/acquisition_report_destroy.html', locals())
 
+ 
 def acquisition_report_edit(request, pk):
-    return HttpResponse("Edit page")
+    return render(request, 'cockpit/acquisition_report_edit.html', locals())
 
 def acquisition_report_detail(request, pk):
     book  = AcquisitionAnalytic()
     newspaper  = AcquisitionAnalytic()
     journal = AcquisitionAnalytic()
-    acquisition_report = AcquisitionReport.objects.get(pk=pk)
-    acquisition_analytics = AcquisitionAnalytic.objects.filter(report_id = acquisition_report.pk)
-    #QuerySet olarak dönen listedeki Modelleri tektek alalım.
-    #Ve html gösteriminde kullanmak üzere sıraya koyalım
-    for analytic in acquisition_analytics:
-        print(analytic.pub_type)
-        if analytic.pub_type.publication_type == "Kitap":
-            book = analytic
-        elif analytic.pub_type.publication_type == "Dergi":
-            journal = analytic
-        else:
-            newspaper = analytic
-    
-    return render(request, 'cockpit/acquisition_report_detail.html', locals())
+
+    try:
+        acquisition_report = AcquisitionReport.objects.get(pk=pk)
+        acquisition_analytics = AcquisitionAnalytic.objects.filter(report_id = acquisition_report.pk)
+        #QuerySet olarak dönen listedeki Modelleri tektek alalım.
+        #Ve html gösteriminde kullanmak üzere sıraya koyalım
+        for analytic in acquisition_analytics:
+            print(analytic.pub_type)
+            if analytic.pub_type.publication_type == "Kitap":
+                book = analytic
+            elif analytic.pub_type.publication_type == "Dergi":
+                journal = analytic
+            else:
+                newspaper = analytic
+        
+        return render(request, 'cockpit/acquisition_report_detail.html', locals())
+    except ObjectDoesNotExist:
+        return render(request, 'cockpit/page_not_found.html', locals())
     
     
 

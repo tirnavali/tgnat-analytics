@@ -2,13 +2,12 @@
 {% load static %}
 {% load my_tags %}
 {% block header %}
+
+<!-- <script type="text/javascript" src="{% static 'cockpit/js/acquisition_report_detail.js' %}"></script> -->
+
 {% endblock %}
 
 {% block content %}
-{{ acquisition_report.reporter_title }}
-{{ acquisition_analytics }}
-
-
 
 <div class="container">
     <div class="row justify-content-center">
@@ -126,8 +125,8 @@
             </div>
             {%  if user.is_authenticated %}
             <div class=" d-print-none col-sm">
-              <a class="btn btn-warning btn-sm float-right ml-2" href="#">Düzenle</a>
-              <a class="btn btn-danger btn-sm float-right" href="#">Sil</a>
+              <a id="sil" class="btn btn-warning btn-sm float-right ml-2" href=" {% url 'acquisition_report_edit' acquisition_report.pk %} ">Düzenle</a>
+              <a class="btn btn-danger btn-sm float-right" href=" {% url 'acquisition_report_destroy' acquisition_report.pk %} ">Sil</a>
             </div>
             {% endif %}
             
@@ -146,4 +145,8 @@
     </div>
   </div>
 
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="{% static 'cockpit/js/acquisition_report_detail.js' %}"></script>
 {% endblock %}
