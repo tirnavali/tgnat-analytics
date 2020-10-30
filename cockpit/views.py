@@ -39,6 +39,35 @@ def acquisition_report_destroy(request, pk):
 
  
 def acquisition_report_edit(request, pk):
+    acquisition_report = AcquisitionReport.objects.get(pk = pk)
+    acquisition_analytics = AcquisitionAnalytic.objects.filter(report_id = acquisition_report.pk)
+    initial_form_data = { 
+        'reporter_identity' : acquisition_report.reporter_identity,
+        'reporter_title' : acquisition_report.reporter_title,
+        'posted_book' : acquisition_report.posted_book,
+        'refactored_items' : acquisition_report.refactored_items,
+        'notes' : acquisition_report.notes,
+        'date' : acquisition_report.date,
+        }
+    form = SaglamaReportForm(initial = initial_form_data)
+    form_2 = SaglamaAnalyticForm()
+    form_3 = SaglamaAnalyticForm()
+    form_4 = SaglamaAnalyticForm()
+
+    #buradan devam edilecek
+    
+    for acquisition_analytic in acquisition_analytics:
+        initial_data = {
+            'pub_type' : 2,
+            'report' : '',
+            'pub_arrived_as_supply' : '',
+            'pub_arrived_as_gift' : '',
+            'pub_bought' : '',
+            'pub_saved_as_supply' : '',
+            'pub_saved_as_gift' : '',
+            'pub_saved_as_old' : ''
+        }
+    
     return render(request, 'cockpit/acquisition_report_edit.html', locals())
 
 def acquisition_report_detail(request, pk):

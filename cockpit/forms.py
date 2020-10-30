@@ -42,7 +42,7 @@ class SaglamaAnalyticForm(forms.Form):
             print("CLeaned data : " + str(self.cleaned_data))
 
 
-            acquisition_analytic.pub_type = self.cleaned_data["pub_type"]
+            acquisition_analytic.pub_type              = self.cleaned_data["pub_type"]
             acquisition_analytic.report                = AcquisitionReport.objects.get(pk = int(report_id))
             acquisition_analytic.pub_arrived_as_supply = self.cleaned_data['pub_arrived_as_supply']
             acquisition_analytic.pub_arrived_as_gift   = self.cleaned_data['pub_arrived_as_gift']

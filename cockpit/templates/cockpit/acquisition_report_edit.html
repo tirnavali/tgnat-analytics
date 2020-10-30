@@ -1,10 +1,55 @@
 {% extends 'cockpit/base.html' %}
 {% load static %}
-{% block header %}
-{% endblock %}
-
+{% load my_tags %}
 
 {% block content %}
-<p>Edit page</p>
+<div class="container bg-light">
+    <h1>Sağlama birimi - analitik düzenleme formu</h1>
+    {% if errors %}
+    <p>{{ errors }}</p>
+    {% endif %}
+    {{ session }}
+    <form method="POST">
+        {% csrf_token %}
 
+        <table class="table table-striped">
+            {{ form }}
+        </table>
+        <div class="input-group mb-3">
+            <table>
+
+                {{ form_2}}
+
+            </table>
+        </div>
+
+        <div class="input-group mb-3">
+
+            <table>
+
+                {{ form_3}}
+
+            </table>
+        </div>
+        <div class="input-group mb-3">
+            <table>
+
+                {{ form_4}}
+
+            </table>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Kaydet">
+
+        <!-- </form>
+<form method="POST">
+    {% csrf_token %}
+    <table class="table table-striped">
+        {{ form_2 }}
+    </table>
+    <input class="btn btn-primary" type="submit" value="Kaydet" >
+
+</form> -->
+
+</div>
 {% endblock %}
