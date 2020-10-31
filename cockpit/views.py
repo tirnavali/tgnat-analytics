@@ -39,6 +39,8 @@ def acquisition_report_destroy(request, pk):
 
  
 def acquisition_report_edit(request, pk):
+    if request.method == 'POST':
+        return HttpResponse("Hop bana post atıldı\n"+ str(request.POST))
     acquisition_report = AcquisitionReport.objects.get(pk = pk)
     acquisition_analytics = AcquisitionAnalytic.objects.filter(report_id = acquisition_report.pk)
     initial_form_data = { 
@@ -50,32 +52,22 @@ def acquisition_report_edit(request, pk):
         'date' : acquisition_report.date,
         }
     form = SaglamaReportForm(initial = initial_form_data)
-    # form_2 = SaglamaAnalyticForm()
-    # form_3 = SaglamaAnalyticForm()
-    # form_4 = SaglamaAnalyticForm()
-    forms = [SaglamaAnalyticForm() for i in range(3)]
-    # forms.append(form_2)
-    # forms.append(form_3)
-    # forms.append(form_4)
+
+    # formların birbirinden ayrılması için id'lerine ön ek verelim. sub_1, sub_2 ...
+    forms = [SaglamaAnalyticForm(prefix = "sub_"+str(i+1)) for i in range(3)]
 
     for index, acquisition_analytic in enumerate(acquisition_analytics):
-        #print("İNDEX ____ "+ index)
-        #print("İTEM ____ "+ acquisition_analytic)
         initial_data = {
             'pub_type' : acquisition_analytic.pub_type,
-            'report' : '',
+            'report' : acquisition_analytic.report,
             'pub_arrived_as_supply' : acquisition_analytic.pub_arrived_as_supply,
-            'pub_arrived_as_gift' : '',
-            'pub_bought' : '',
-            'pub_saved_as_supply' : '',
-            'pub_saved_as_gift' : '',
-            'pub_saved_as_old' : ''
+            'pub_arrived_as_gift' : acquisition_analytic.pub_arrived_as_gift,
+            'pub_bought' : acquisition_analytic.pub_bought,
+            'pub_saved_as_supply' : acquisition_analytic.pub_saved_as_supply,
+            'pub_saved_as_gift' : acquisition_analytic.pub_saved_as_gift,
+            'pub_saved_as_old' : acquisition_analytic.pub_saved_as_old
         }
         forms[index-1].initial = initial_data #forms is python list begins from 0 but enumarate begins 1
-
-       
-    
-   
     
     return render(request, 'cockpit/acquisition_report_edit.html', locals())
 
