@@ -15,29 +15,17 @@
         <table class="table table-striped">
             {{ form }}
         </table>
-        <div class="input-group mb-3">
-            <table>
+{% for acquisition_analytic_form in forms %}
+<div class="input-group mb-3">
+    <table>
 
-                {{ form_2}}
+        {{ acquisition_analytic_form }}
 
-            </table>
-        </div>
+    </table>
+</div>
+{% endfor %}
 
-        <div class="input-group mb-3">
 
-            <table>
-
-                {{ form_3}}
-
-            </table>
-        </div>
-        <div class="input-group mb-3">
-            <table>
-
-                {{ form_4}}
-
-            </table>
-        </div>
 
         <input class="btn btn-primary" type="submit" value="Kaydet">
 

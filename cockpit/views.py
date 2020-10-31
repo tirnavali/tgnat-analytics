@@ -50,23 +50,32 @@ def acquisition_report_edit(request, pk):
         'date' : acquisition_report.date,
         }
     form = SaglamaReportForm(initial = initial_form_data)
-    form_2 = SaglamaAnalyticForm()
-    form_3 = SaglamaAnalyticForm()
-    form_4 = SaglamaAnalyticForm()
+    # form_2 = SaglamaAnalyticForm()
+    # form_3 = SaglamaAnalyticForm()
+    # form_4 = SaglamaAnalyticForm()
+    forms = [SaglamaAnalyticForm() for i in range(3)]
+    # forms.append(form_2)
+    # forms.append(form_3)
+    # forms.append(form_4)
 
-    #buradan devam edilecek
-    
-    for acquisition_analytic in acquisition_analytics:
+    for index, acquisition_analytic in enumerate(acquisition_analytics):
+        #print("İNDEX ____ "+ index)
+        #print("İTEM ____ "+ acquisition_analytic)
         initial_data = {
-            'pub_type' : 2,
+            'pub_type' : acquisition_analytic.pub_type,
             'report' : '',
-            'pub_arrived_as_supply' : '',
+            'pub_arrived_as_supply' : acquisition_analytic.pub_arrived_as_supply,
             'pub_arrived_as_gift' : '',
             'pub_bought' : '',
             'pub_saved_as_supply' : '',
             'pub_saved_as_gift' : '',
             'pub_saved_as_old' : ''
         }
+        forms[index-1].initial = initial_data #forms is python list begins from 0 but enumarate begins 1
+
+       
+    
+   
     
     return render(request, 'cockpit/acquisition_report_edit.html', locals())
 
