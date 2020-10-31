@@ -124,7 +124,8 @@ def acquisition_report_new(request):
         form_2 = SaglamaAnalyticForm(request.POST, prefix="sub_2")
         form_3 = SaglamaAnalyticForm(request.POST, prefix="sub_3")
         print("## form_1 basılıyor ## \n\n"+str(form_1)+"\n\n")
-        acquisition_report = AcquisitionReport() # Modelimizi oluşturalım
+        #### düzenleme sayfası için aynı iş mantığı mı kullanılacak?
+        acquisition_report = AcquisitionReport()     # Modelimizi oluşturalım
         """ acquisition_analytic_sub_1 = AcquisitionAnalytic()
         acquisition_analytic_sub_2 = AcquisitionAnalytic()
         acquisition_analytic_sub_3 = AcquisitionAnalytic() """
