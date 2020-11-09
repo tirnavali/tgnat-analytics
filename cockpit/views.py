@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.serializers import serialize
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -39,13 +39,15 @@ def acquisition_report_destroy(request, pk):
 
  
 def acquisition_report_edit(request, pk):
+    acquisition_report = get_object_or_404(AcquisitionReport, pk= pk)
+
     if request.method == 'POST':
         acquisition_report_form = SaglamaReportForm(request.POST)
         #acquisition_report = request.POST['ac']
-        print(acquisition_report_form)
+        print("pk is : "+ str(pk))
         return HttpResponse("Hop bana post atıldı\n"+ str(request.POST))
     elif request.method == 'GET':
-        acquisition_report = AcquisitionReport.objects.get(pk = pk)
+        #acquisition_report = AcquisitionReport.objects.get(pk = pk)
         acquisition_analytics = AcquisitionAnalytic.objects.filter(report_id = acquisition_report.pk)
         initial_form_data = { 
             'reporter_identity' : acquisition_report.reporter_identity,
