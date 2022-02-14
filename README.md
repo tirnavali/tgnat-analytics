@@ -1,4 +1,4 @@
-# tbmm-analytics
+# tgnat-analytics
 @author Sercan Tırnavalı
 @date 2020
 @location Turkey
@@ -12,7 +12,4 @@ Sqlite
 
 
 
-[ISS01] Ancak arka planda halen POST açığı var. --> views.py
-[ISS02] Chart butonlarında isim gelmiyor. --> reference_chart.py
-[ISS03] SaglamaAnalyticForm veri doğrulaması yapılmalı --> forms.py
 
